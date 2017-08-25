@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Remodal example</title>
+  <meta name="description" content="Remodal example">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../src/jquery.remodal.css">
+</head>
+<body>
+
+
+  
+
+
+<div class="remodal" data-remodal-id="modal">
+  <div>asdfasfasdfdsa</div>
+    <div>asdfasfasdfdsaasfasfjasifjiasfasdfhasdfhasdhfadsfasfasfasfdahfsadfa</div>
+</div>
+<background-squarester><div style="border:2px solid black;"></div></background-squarester>
+
+
+<!-- You can define the global options -->
+<script>
+  // window.remodalGlobals = {
+  //   namespace: "remodal",
+  //   defaults: {
+  //     hashTracking: true,
+  //     closeOnConfirm: true,
+  //     closeOnCancel: true,
+  //     closeOnEscape: true,
+  //     closeOnAnyClick: true
+  //   }
+  // };
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../libs/jquery/dist/jquery.min.js"><\/script>')</script>
+<script src="../src/jquery.remodal.js"></script>
+
+<!-- Events -->
+<script>
+    $(document).ready(function(){
+  $(document).on("open", ".remodal", function () {
+    console.log("open");
+  });
+   
+
+  $(document).on("opened", ".remodal", function () {
+    
+     
+
+  });
+
+  $(document).on("close", ".remodal", function (e) {
+    console.log('close' + (e.reason ? ", reason: " + e.reason : ''));
+  });
+
+  $(document).on("closed", ".remodal", function (e) {
+    console.log('closed' + (e.reason ? ', reason: ' + e.reason : ''));
+  });
+
+  $(document).on("confirm", ".remodal", function () {
+    console.log("confirm");
+  });
+
+  $(document).on("cancel", ".remodal", function () {
+    console.log("cancel");
+  });
+
+//  You can open or close it like this:
+  $(function () {
+    var inst = $.remodal.lookup[$("[data-remodal-id=modal]").data("remodal")];
+    inst.open();
+    inst.close();
+  });
+
+  ////  Or init in this way:
+  //var inst = $("[data-remodal-id=modal2]").remodal();
+  //inst.open();
+    });
+</script>
+
+</body>
+</html>

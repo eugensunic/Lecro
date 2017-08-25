@@ -1,0 +1,696 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Lecro</title>                                                                <!-- title enabled -->
+
+    <meta charset="utf-8">                                                              <!--all char enabled-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">                <!--device enabled-->
+    <!-- STYLESHEET BEGIN-->
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="cms_css/page2.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>                <!--CORE-->
+    <script src="https://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>                                    <!--ENHANCMENT-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>              <!--BOOTSTRAP-->
+    <script src="cms_js/globalfuncmedia.js"></script>
+    <script src="cms_js/nacional.js"></script>
+    <script src="cms_js/vecernji.js"></script>
+
+    <script>
+        var nacional_select = false;
+        var sata24_select = false;
+        var vecernji_select = false;
+
+        var links_transfer = [];  // za vecernji
+        var links_transfer2 = []; // za nacional
+        var next_page_counter = 1;  //glavni linkovi 1-67 raspon
+        var num_of_articles = 0;   //linkovi clanaka do 15
+
+        //var url_links = [];
+        var url_links_nacional = [];
+        var new_array_url_nacional = [];
+        var headingstorage = "";
+       
+        //search sentences begin
+        var loadwordsarray = [];
+        var nextval = { value_of_next: 0 };
+        var previousval = { value_of_next: 0 };
+        var array_previous_sentence = [];
+        var array_next_sentence = [];
+        var z = 0;
+        var textsearch = "";
+        var array_searchforsentence = [];
+        var bool_nextpost = false;
+        var counter_posts = 0; //counting inside the nextpost
+        var checkboxstring = "";
+        var storepersonid;
+        var database_name = "";
+        var database_lastname = "";
+        var previous_sentence_boolean = false;
+        var next_sentence_boolean = false;
+        //search sentences end
+
+        $(document).ready(function () {
+            $("#first-checkbox").prop("checked", false);
+            $("#second-checkbox").prop("checked", false);
+            $("#third-checkbox").prop("checked", false);
+            // EVENTS BEGIN
+            $("#first-checkbox").change(function () {
+                if($('#first-checkbox').is(':checked')){
+                    checkboxstring = "firstcheck";
+                }
+                $("#third-checkbox").prop("checked", false);
+                $("#second-checkbox").prop("checked", false);
+            });
+            $("#second-checkbox").change(function () {
+                if ($('#second-checkbox').is(':checked')) {
+                    checkboxstring = "secondcheck";
+                }
+                $("#first-checkbox").prop("checked", false);
+                $("#third-checkbox").prop("checked", false);
+            });
+            $("#third-checkbox").change(function () {
+                if ($('#third-checkbox').is(':checked')) {
+                    checkboxstring = "thirdcheck";
+                }
+                $("#first-checkbox").prop("checked", false);
+                $("#second-checkbox").prop("checked", false);
+            });
+            $(".dropdown-menu li a").click(function () {
+                if ($(this).text() == "Večernji") { $("#image-change").prop("src", 'images/logo/vecernji_logo.jpg'); nacional_select = false; vecernji_select = true; sata24_select = false; $("#drop-down-button").text("Večernji"); }
+                else if ($(this).text() == "24sata") { $("#image-change").prop("src", 'images/logo/24sata_logo.gif'); nacional_select = false; vecernji_select = false; sata24_select = true; $("#drop-down-button").text("24sata"); }
+                else if ($(this).text() == "Nacional") { $("#image-change").prop("src", 'images/logo/nacional_logo.gif'); nacional_select = true; vecernji_select = false; sata24_select = false; $("#drop-down-button").text("Nacional"); }
+            });
+            $("#submit-but").click(function () {
+                submitButton();
+            });
+            $("#next-but").click(function () {
+                nextPost();
+            });
+            $("#next-sentence").click(function () {
+                next_sentence_boolean = true;
+                if (previous_sentence_boolean) {
+                    $("#second").val(getAnotherPreviousSentence(textsearch, array_previous_sentence[counter_posts - 1]) + array_searchforsentence[counter_posts - 1] + getAnotherNextSentence(textsearch, array_next_sentence[counter_posts - 1]));
+                }
+                else {
+                    $("#second").val(getAnotherNextSentence(textsearch, array_previous_sentence[counter_posts - 1]) + array_searchforsentence[counter_posts - 1]);
+                }
+                $("#second").val(array_searchforsentence[counter_posts - 1] + getAnotherNextSentence(textsearch, array_next_sentence[counter_posts - 1]));
+            });
+            $("#previous-sentence").click(function () {
+                previous_sentence_boolean = true;
+                if (next_sentence_boolean) {
+                    $("#second").val(getAnotherPreviousSentence(textsearch, array_previous_sentence[counter_posts - 1]) + array_searchforsentence[counter_posts - 1] + getAnotherNextSentence(textsearch, array_next_sentence[counter_posts - 1]));
+                }
+                else {
+                    $("#second").val(getAnotherPreviousSentence(textsearch, array_previous_sentence[counter_posts - 1]) + array_searchforsentence[counter_posts - 1]);
+                }
+               
+            });
+            $("#load-words").click(function () {
+                $.ajax({
+                    url: 'http://projectsgono.com/lecro/loadwords.php',
+                    dataType: "json",
+                    type: 'get',
+                    success: function (response) {
+                        for (var i = 0; i < response.length; i++) {
+                            loadwordsarray.push(response[i].naziv);
+                            $("#load-bool").text("Words loaded").css("color", "green");
+                        }
+                    }
+                });
+                //$("#load-bool").text("Words NOT loaded").css("color","red");
+            });
+            $("#write-to-db").click(function () {
+             
+                if ($('#first-checkbox').is(':checked') || $('#second-checkbox').is(':checked') || $('#third-checkbox').is(':checked')) {
+                    var dt = new Date(getFormatDate());
+                    var datephp = dt.toYMD();
+                   
+                    $.ajax({
+                        url: 'http://projectsgono.com/lecro/writetodatabase.php',
+                        type: 'post',
+                        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                        data: { "checkvalue": checkboxstring, "date": datephp, "osobafk": storepersonid, "sentence": $("#third").val(), "naslov": $("#heading1").text(), "url": $("#url1").text() },
+                        success: function (response) {
+                            alert("success")
+                            
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert(textStatus, errorThrown);
+                        }
+                    });
+                }
+                else {
+                    alert("You have to check a checkbox");
+                }
+            });
+            // EVENTS END
+
+            (function () {
+                Date.prototype.toYMD = Date_toYMD;
+                function Date_toYMD() {
+                    var year, month, day;
+                    year = String(this.getFullYear());
+                    month = String(this.getMonth() + 1);
+                    if (month.length == 1) {
+                        month = "0" + month;
+                    }
+                    day = String(this.getDate());
+                    if (day.length == 1) {
+                        day = "0" + day;
+                    }
+                    return year + "-" + month + "-" + day;
+                }
+            })(); //date convert function to mysql
+            function getFormatDate() { //iskoristi kod animate.js
+                var newstring = $("#date1").text().trim().split('.').join('-');
+                newstring = newstring.substring(0, newstring.length - 1); //27-4-2012
+                var positionfirst = newstring.indexOf('-');
+                var tempstring = "";
+                var templength = newstring.substring(0, newstring.indexOf('-')).length;
+                var templengthdate = newstring.substring(positionfirst + 1, newstring.indexOf('-', positionfirst + 1)).length;
+
+                if (templength == 1) {
+                    tempstring = newstring.substring(0, 1);
+                }
+                else if (templength == 2) {
+                    tempstring = newstring.substring(0, 2);
+                }
+                if (templengthdate == 1) {
+                    tempstringdate = "0" + newstring.substring(positionfirst + 1, newstring.indexOf('-', positionfirst + 1));
+                }
+                else if (templengthdate == 2) {
+                    tempstringdate = newstring.substring(positionfirst + 1, newstring.indexOf('-', positionfirst + 1));
+                }
+
+                newstring = newstring.substring(newstring.indexOf('-', positionfirst + 1)).replace('-', '') + "-" + tempstringdate + "-" + tempstring;
+               return newstring.trim();
+                
+            } //animate js.
+            function getPersonId() {
+                $.ajax({
+                    url: 'http://projectsgono.com/lecro/getpersonid.php',
+                    type: 'post',
+                    dataType: 'json',
+                    data: { "ime": database_name, "prezime":database_lastname},
+                    success: function (response) {
+                        storepersonid = response[0].Id;
+                  
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("data fetch ERROR");
+                        alert(textStatus, errorThrown);
+                        
+                    }
+                });
+            }
+            function includeShortcuts(input_text, i) {
+                // sve ovo jos trebas staviti sa ako je recimo (npr .) pa ne odma tocka znaci i='.' i-1=''  e ne treba jer je vec pokriveno s drugim
+                if ((input_text[i] == "." && !(isNaN(input_text[i - 1]))) || //(broj).
+                              (input_text[i - 1] == " " && input_text[i] == "." && (!(isNaN(input_tegtxt[i - 2])) || (isNaN(input_text[i - 2])))) ||
+                              (input_text[i - 1] == "d" && input_text[i] == "." && input_text[i - 2] == "t" && input_text[i - 3] == "i") || //itd
+                              (input_text[i - 1] == "v" && input_text[i] == "." && input_text[i - 2] == "z" && input_text[i - 3] == "t") || //tzv
+                              (input_text[i - 1] == "r" && input_text[i] == "." && input_text[i - 2] == "p" && input_text[i - 3] == "n") || //npr
+                              (input_text[i - 1] == "d" && input_text[i] == "." && input_text[i - 2] == "o" && input_text[i - 3] == "g") || //god
+                              (input_text[i - 1] == "r" && input_text[i] == "." && input_text[i - 2] == "t" && input_text[i - 3] == "s") || //str
+                              (input_text[i - 1] == "l" && input_text[i] == "." && input_text[i - 2] == "č") || //čl
+                              (input_text[i - 1] == "r" && input_text[i] == "." && input_text[i - 2] == "b") || //br
+                              (input_text[i - 1] == "j" && input_text[i] == "." && input_text[i - 2] == "t")    //tj
+                              ) {
+
+                    return true;
+
+                }
+                else {
+
+                    return false;
+                }
+            }
+            function findDotBefore(i) {
+                do {
+                    --i;
+                } while ((textsearch.charAt(i) != '.'));
+                return --i;
+            }
+            function reverser(inputsentence) {
+                reversed_sentence = "";
+                if (inputsentence == null) {
+                    return "";
+                }
+                else {
+                    for (var i = inputsentence.length - 1; i >= 0; i--) {
+                        reversed_sentence += inputsentence[i];
+
+
+                    }
+                    return reversed_sentence;
+                }
+
+
+            }
+            function getNextSentence(input_text, i) {
+                var concatenate = "";
+
+                do {
+                    i++;
+                    if (i == input_text.length) { break; } //kraj
+                    if (includeShortcuts(input_text, i)) {
+                        concatenate += input_text[i];
+                        i++;
+                    }
+                    concatenate += input_text[i];
+
+                } while (input_text.charAt(i) != '.');
+                previousval.value_of_next = nextval.value_of_next;
+                array_next_sentence.push(i);
+                
+                nextval.value_of_next = i;
+                return concatenate;
+            }
+            function getBeforeSentence(input_text, i) {
+                var concatenate = "";
+
+                do {
+                    i--;
+                    if (i <= previousval.value_of_next) { break; }
+                    if (i == 0) { break; }
+                    if (includeShortcuts(input_text, i)) {
+                        concatenate += input_text[i];
+                        i--;
+                    }
+                    concatenate += input_text[i];
+
+
+                } while (input_text.charAt(i) != '.');
+                array_previous_sentence.push(i);
+               
+                return concatenate;
+            }
+            function checkForWord(array0, sentence) {
+                var wordmatch = false;
+                for (var i = 0; i < array0.length; i++) {
+                   
+                    if ((sentence.indexOf(array0[i]) > -1) || (sentence.indexOf(array0[i].substring(0, 1).toUpperCase() + array0[i].substring(1, array0.length))) > -1) { //milijun ili Milijun
+                        wordmatch = true;
+                        break;
+                    }
+                }
+                return wordmatch;
+            }
+            function searchForKeyword(input_name, current_index) {
+              
+                    var forward_sentence = "";
+                    var backwards_sentence = "";
+                    var next_sentence = "";
+                    var full_sentence = "";
+                    var getindex;
+
+
+                    //odi sve do zavrsetka recenice
+                    do {
+
+                        if ((textsearch.indexOf(input_name, current_index) > -1)) {   //metoda contains osjetljiva na mala i velika slova
+
+                            getindex = textsearch.indexOf(input_name, current_index); //nema +1 ko obicno jer je +1 u petlji., indexof is casesensitive
+                            z = getindex - 1; //"L"
+
+                            do {
+                                z++;
+                                if (z == textsearch.length) { break; } //kraj
+                                if (includeShortcuts(textsearch, z)) {
+                                    forward_sentence += textsearch[z];
+                                    z++;
+                                }
+
+                                forward_sentence += textsearch[z];
+
+                            } while (textsearch.charAt(z) != '.'); //dohvati taj index z! za funkciju sljedecu, ovo ukljucuje i ako je skroz na krajuu rijec
+
+                            forward_sentence += getNextSentence(textsearch, z)
+                            current_index = nextval.value_of_next + 1; // for next global iteration
+                            z = getindex; //set back to name encounter
+
+                            if (z != 0) { // da ne ude u beskonacnu petlju
+                                do {
+                                    z--;
+                                    if (z == 0) { break; } //pocetak
+
+                                    if (includeShortcuts(textsearch, z)) {
+                                        backwards_sentence += textsearch[z];
+                                        z--;
+                                    }
+
+                                    backwards_sentence += textsearch[z];
+
+                                } while (textsearch.charAt(z) != ".");
+                                full_sentence = reverser(getBeforeSentence(textsearch, z)) + reverser(backwards_sentence) + forward_sentence;
+                            }
+                            else {
+                                full_sentence = forward_sentence;
+                            }
+
+                            array_searchforsentence.push(full_sentence); //store sentences in array
+                            //alert(full_sentence);
+                         
+
+                            backwards_sentence = "";
+                            forward_sentence = "";
+                            full_sentence = "";
+                            nextval.value_of_next = 0;
+                            previousval.value_of_next = 0;
+                           
+                            z = 0;
+
+                        }
+                        else {
+                            alert("Name not found");
+                        }
+                    } while (textsearch.indexOf(input_name, current_index) > -1);
+                   
+            }
+            function getAnotherPreviousSentence(input_text, i) {
+                var concatenate = "";
+                if (i <= z) { alert("end reached"); }
+                else {
+                    do {
+                        i--;
+
+
+                        if (includeShortcuts(input_text, i)) {
+                            concatenate += input_text[i];
+                            i--;
+                        }
+                        concatenate += input_text[i];
+
+
+                    } while (input_text.charAt(i) != '.');
+                }
+                return reverser(concatenate);
+            }
+            function getAnotherNextSentence(input_text, i) {
+                var concatenate = "";
+                if (i == input_text.length) { alert("End reached can not go further") } //kraj
+                else {
+                    do {
+                        i++;
+                        if (i == input_text.length) { alert("End reached can not go further"); break; } // dok ne sredim problem moraju biti dva
+                        if (includeShortcuts(input_text, i)) {
+                            concatenate += input_text[i];
+                            i++;
+                        }
+                        concatenate += input_text[i];
+
+                    } while (input_text.charAt(i) != '.');
+                   
+                }
+                return concatenate;
+            }
+          
+
+       
+            function submitButton() {
+
+                    num_of_articles = 0; // settings articles to start level
+                    if ($("#input-url").val().trim() == "") {
+                        alert("Input is empty");
+                    }
+                    else {
+                       
+                        if ($("#input-url").val().trim().length > 65) {
+                            var fullstring = vecernji.getNameWhenTimeInterval($("#input-url").val().trim());
+                            
+                            database_name = fullstring.substring(0, fullstring.indexOf('+'));
+                            database_lastname = fullstring.substring(fullstring.indexOf('+') + 1, fullstring.length);
+                            getPersonId();
+                            $("#time-interval").text(vecernji.getTimeInterval($("#input-url").val().trim()));
+                            $("#person").text(database_name+" "+database_lastname);
+                        }
+                        else {
+                            var fullstring = vecernji.getNameWhithoutTimeInterval($("#input-url").val().trim());
+                            database_name = fullstring.substring(0, fullstring.indexOf('+'));
+                            database_lastname = fullstring.substring(fullstring.indexOf('+') + 1, fullstring.length);
+                            
+                            getPersonId();
+                            $("#person").text(database_name + " " + database_lastname);
+                        }
+                      
+                        $.ajax({
+                            url: 'http://projectsgono.com/lecro/gethtml.php',
+                            type: 'post',
+                            data: { "callFunc1": $("#input-url").val() },
+                            success: function (response) {
+                                //reseting global variables
+                                bool_nextpost = false;
+                                counter_posts = 0;
+                                array_searchforsentence = [];
+                                $("#listbox").text("");
+
+                                if (vecernji_select) {
+                                  
+                                    $("#search-term").text(vecernji.endPageMaximumNumberOfArticles(response));
+                                    links_transfer = vecernji.getUrlBlock(response); 
+                                    $("#p-num").text(getPage()); 
+                                    $("#a-num").text(links_transfer.length);
+                                   
+                                }
+                                else if (nacional_select) {
+
+                                    nacional.getUrlBlock(response);
+                                    // nacional.getGazeta(response);
+                                    // nacional.getTextNacional(response);
+
+                                    // nacional.getUrlBlock(response); // RADI
+                                    // nacional.getArticlesUrlPage(response); //RADI
+                                    // nacional.getArticleCleanText(response);// RADI
+                                    //nacional.getUrlGazeta(response); RADI
+                                }
+                               
+                               
+                            }
+                        });
+                    }
+
+                }
+                function searchArticlesUrlNacional() {
+                    //num_of_articles=0; mora biti globalna
+                    $.ajax({
+                        url: 'http://projectsgono.com/lecro/gethtml.php',
+                        type: 'post',
+                        data: { "callFunc1": 'http://arhiva.nacional.hr/' + url_links_nacional[num_of_articles] },
+                        success: function (response) {
+                            $("#listbox2").text("");
+
+                            // vecernji.getUrlBlock(response); //RADI
+                            // vecernji.getArticleCleanText(response); //RADI
+                            // nacional.getGazeta(response);
+                            // nacional.getTextNacional(response);
+
+                            // nacional.getUrlBlock(response); // RADI
+                            nacional.getArticlesUrlPage(response); //RADI
+                            // nacional.getArticleCleanText(response);// RADI
+                            //nacional.getUrlGazeta(response); RADI
+
+
+
+
+                        }
+                    });
+                }
+                function nextPost() {
+                     previous_sentence_boolean = false;
+                     next_sentence_boolean = false;
+                    if (vecernji_select) {
+                        if (num_of_articles == links_transfer.length) { alert("end reached"); }
+                        else if (bool_nextpost) {
+                            if (counter_posts < array_searchforsentence.length) {
+                                if (checkForWord(loadwordsarray, array_searchforsentence[counter_posts])) {
+                                   
+                                    $("#second").val(array_searchforsentence[counter_posts]);
+                                }
+                                else { $("#second").text(""); alert("no match" );}
+                                counter_posts++;
+                            }
+                            else {
+                                bool_nextpost = false;
+                                array_searchforsentence = [];
+                                alert("Going to next article");
+                            }
+                        }
+                        else {
+                            $('option[value="' + num_of_articles + '"]').css("background-color", "#CCCCCC");
+                            $.ajax({
+                                url: 'http://projectsgono.com/lecro/gethtml.php',
+                                type: 'post',
+                                data: { "callFunc1": 'http://www.vecernji.hr' + links_transfer[num_of_articles] },
+                                success: function (response) {
+                                 
+                                    $("#url1").text('http://www.vecernji.hr' + links_transfer[num_of_articles]);
+                                    $("#first").val(vecernji.getArticleCleanText(response));
+
+                                    textsearch = vecernji.getArticleCleanText(response);
+                                    array_next_sentence = []; // reset index arrays for next sentence button
+                                    array_previous_sentence = [];  // reset index arrays for previous sentence button
+                                    searchForKeyword("Holy", 0);  //dinamic data
+                                    if (array_searchforsentence.length != 0 && bool_nextpost == false) {
+                                        counter_posts = 0;
+                                  
+                                        if (checkForWord(loadwordsarray, array_searchforsentence[counter_posts])) {
+                                           
+                                            $("#second").val(array_searchforsentence[counter_posts]);
+                                        }
+                                        else { alert("no match"); }
+                                        counter_posts++;
+                                        bool_nextpost = true;
+                                    }
+                                    num_of_articles++;
+                                    $("#p-num").text(num_of_articles);
+                                    $("#page2").text(num_of_articles);
+                                    $("#page-flow").text(num_of_articles);
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    alert(textStatus, errorThrown);
+                                }
+                            });
+                        }
+                    }
+                    else if (nacional_select) {
+                        if (num_of_articles == links_transfer2.length) { alert("end reached"); }
+
+                        else {
+                            // $('option[value="' + num_of_articles + '"]').css("background-color", "#CCCCCC");
+                            $.ajax({
+                                url: 'http://projectsgono.com/lecro/gethtml.php',
+                                type: 'post',
+                                data: { "callFunc1": 'http://arhiva.nacional.hr' + links_transfer2[num_of_articles] },
+                                success: function (response) {
+
+                                    $("#url1").text('http://arhiva.nacional.hr' + links_transfer2[num_of_articles]);
+                                    $("#first").val(nacional.getArticleCleanText(response));
+                                    num_of_articles++;
+
+                                }
+                            });
+                        }
+                    }
+                }
+              
+        });
+         
+          
+        
+	</script>
+</head>
+<body style="margin-bottom: 40px;">
+    <img id="image-change" src="" style="width:150px;height:45px;" />
+    <div id="stats-header" style="text-align:center;">
+        <p id="time-interval">Time Interval</p>
+        <p style="display:inline-block;">Page number:</p>
+        <h3 id="p-num" style="display:inline-block;">0</h3>
+        <p style="display:inline-block;margin-left: 20px;">Article number:</p>
+        <h3 id="a-num" style="display:inline-block;">0</h3>
+    </div>
+    <div class="container" style="border:1px solid black !important; ">
+        <div class="row" style="position:relative;padding-right: 9px;border:0px solid black !important;">
+            <div class="left-top-settings" style="width:130px; border:0;">Whole article text</div>
+            <textarea id="first">
+              
+            </textarea>
+       </div>
+        <div class="row" style="border:0px solid black !important;">
+           
+            <div class="col-sm-6" style="padding:0px !important;">
+                <h3 id="person" style="text-align:center;">Person</h3>
+                <textarea id="second"></textarea>
+                <div id="buttons">
+                    <button id="next-but" class="btn btn-default" type="button">Next</button>
+                    <p></p>
+                    <button id="previous-sentence" class="btn btn-default" type="button">Previous sentence</button>
+                    <button id="next-sentence" class="btn btn-default" type="button">Next sentence</button>
+                    <p></p>
+
+                </div>
+            </div>
+            <div class="col-sm-6" style="border:1px solid black; padding:0px; border-right:0px;">
+                <div class="left-top-settings" style="margin-bottom:5px;">Stats</div>
+               
+                    <div class="col-sm-8">
+
+                        <p style="float:left">URL:</p>
+                        <p class="stats-style" id="url1">text</p>
+
+                        <p style="float:left;">Heading:</p>
+                        <p class="stats-style" id="heading1">text</p>
+
+
+                        <p style="float:left;">Date:</p>
+                        <p class="stats-style" id="date1">text</p>
+
+
+
+
+                    </div>
+                    <div class="col-sm-4">
+                        <p style="float:left;">End page:</p>
+                        <p class="stats-style" id="search-term">text:</p>
+                        <p style="float:left;">Page:</p>
+                        <p class="stats-style" id="page2">text</p>
+                        <p style="float:left;">r :</p>
+                        <p class="stats-style" id="nesto2">-1</p>
+
+                    </div>
+                <hr>
+                <p style="margin-left:4px; position:relative;">Database text</p>
+                <textarea id="third" style="width:99.3%;height:137px;margin-left:2px;margin-right:2px !important;margin-bottom:2px;"></textarea>
+                <button id="write-to-db" class="btn btn-success" type="button" style="z-index:100;margin:4px;">Write to database</button>
+                <input id="first-checkbox" type="checkbox" name="vehicle" value="Bike"> radoviPostupciAktivnost
+                <input id="second-checkbox" type="checkbox" name="vehicle" value="Car" checked="checked"> prjedloziPodrska
+                <input id="third-checkbox" type="checkbox" name="vehicle" value="Car" checked="checked"> optuznice
+                
+                
+         </div>
+            </div>
+        <div class="row">
+        </div>
+        <div class="row" style="border:0px solid black;">
+            <div class="left-top-settings">Settings</div>
+            <div class="col-sm-8" style="border:1px solid black;padding:5px;">
+                   
+                <div class="btn-group">
+                    <a id="drop-down-button" class="btn btn-primary" href="#">
+                        Select news site:
+                    </a>
+                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Večernji</a></li>
+                        <li><a href="#">24sata</a></li>
+                        <li><a href="#">Nacional</a></li>
+                    </ul>
+                </div>
+            <p style="display:block; padding-top:7px;">Input URL:</p>
+            <input  class="form-control" id="input-url" type="text" name="urls" style="width:450px;" >
+            <button id="submit-but" class="btn btn-default" type="button">Submit</button>
+                <p></p>
+            <button id="load-words" class="btn btn-default" type="button">Load keywords</button>
+                <p id="load-bool">Keywords not loaded</p>
+           <div id="append-element" style="border:0;"></div>  <!--dinamicki button-->
+                <p></p>
+                <button id="wordsbutton" type="button" class="btn btn-success">Show matching words</button>
+            </div>
+           
+            <div class="col-sm-4" style="border:1px solid black;">
+                <h4 style="margin-left:60px;">Multiple links:</h4>
+                <p style="float:left;">Page number:</p>
+                <p id="page-flow"></p>
+                <select id="listbox" size="10" name="decision2" style="width:100%;"></select>
+                <p style="float:left;">Number of urls on page:</p>
+                <p id="num-url">text</p>
+                <div id="append-listbox"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

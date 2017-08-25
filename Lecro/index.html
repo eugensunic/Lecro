@@ -1,0 +1,1079 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Lecro</title>                                                                                       <!-- title enabled -->
+
+    <meta charset="utf-8">                                                                                     <!--all char enabled-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">                                       <!--device enabled-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- STYLESHEET BEGIN-->
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> <!--Ovo je novo-->
+    <link rel="stylesheet" type="text/css" href="css/index.css">                                               <!--HTML BODY DESIGN-->
+    <link rel="stylesheet" href="popupwindow/src/jquery.remodal.css">                                          <!--POP UP DESIGN-->
+    <link href="css/timeline.css" rel="stylesheet">                                                            <!--TIMELINE DESIGN-->
+    <link href="css/typeaheading.css" rel="stylesheet">                                                        <!--TYPEAHEAD DESIGN-->
+    <link href="css/isotoping.css" rel="stylesheet">                                                           <!--ISOTOPE DESIGN-->
+    <link href="css/graphing.css" rel="stylesheet">                                                            <!--GRAPH DESIGN-->
+    <link href="css/resolution.css" rel="stylesheet">                                                          <!--RESOLUTION ADJUST-->
+    <link href="css/popupbox.css" rel="stylesheet">                                                            <!--POP UP BOX CUSTOM-->
+    <link href="css/socialnetwork.css" rel="stylesheet">                                                       <!--SOCIAL NETWORK BUTTONS-->
+    <link href="css/graphing.css" rel="stylesheet">   
+    <link href="css/mozzila.css" rel="stylesheet"> 
+    <link href="css/safari.css" rel="stylesheet">                    
+    <link rel="shortcut icon" href="/images/logo/logo.ico" />                                                  <!--TITLE ICON IMAGE-->
+
+
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css"/>   <!--GOOGLE FONT-->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />                    <!--FONT AWESOME->
+   
+  
+
+    <!-- STYLESHEET END -->
+    <!-- SCRIPT BEGIN (https mandatory) -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>                  <!--CORE-->
+    <script src="https://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>                                      <!--ENHANCMENT-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>                <!--BOOTSTRAP-->
+    <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>         <!--TYPEAHEAD-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.1/isotope.pkgd.min.js"></script>    <!--ISOTOPE-v2-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>                                <!--GOOGLE-CHARTS-->
+    <script src="js/globals.js"></script>                                                                      <!--GLOBAL VARIABLES-->
+    <script src="js/index.js"></script>                                                                        <!--INDEX PAGE FUNCTIONS-->
+    <script src="js/chartsgoogle.js"></script>                                                                 <!--COLUMN_PIE_MANIPULATION_GOOGLE_CHARTS-->
+    <script src="popupwindow/src/jquery.remodal.js"></script>                                                  <!--POP-UP-->
+    <script src="js/animate.js"></script>                                                                      <!--ANIMATE TO CENTER-->
+    <script src="js/addicon.js"></script>                                                                      <!--TYPEAHEAD ADD ICON-->
+    <script src="js/timeline.js"></script>                                                                     <!--TIMELINE EVENT HANDLING-->
+    <script src="js/language.js"></script>                                                                     <!--LANGUAGE CHANGE-->
+    <script src="js/settings.js"></script>                                                                     <!--SETTINGS EVENTS-->
+
+
+
+    <script>
+      
+        var $container;
+        var filter_cro = false;
+        var filter_all = false;
+
+        $(document).ready(function () {
+            //Safari fix begin
+            checkIfSafariAndSet();
+            //Safari fix end
+            $("#scrolluptop").hide();
+            filter_all = true;
+            closeSettingsAtAppStart();
+            populateTypeaheadBoxWithAll();
+            $("#change-image").prop("src", "images/indeximage/group-people.png").fadeIn(1);
+            $("#everyone").addClass("trend-add");
+
+            var MyRequestsCompleted = (function () {
+                var numRequestToComplete,
+                    requestsCompleted,
+                    callBacks,
+                    singleCallBack;
+
+                return function (options) {
+                    if (!options) options = {};
+
+                    numRequestToComplete = options.numRequest || 0;
+                    requestsCompleted = options.requestsCompleted || 0;
+                    callBacks = [];
+                    var fireCallbacks = function () {
+
+                        for (var i = 0; i < callBacks.length; i++) callBacks[i]();
+                    };
+                    if (options.singleCallback) callBacks.push(options.singleCallback);
+
+
+
+                    this.addCallbackToQueue = function (isComplete, callback) {
+                        if (isComplete) requestsCompleted++;
+                        if (callback) callBacks.push(callback);
+                        if (requestsCompleted == numRequestToComplete) fireCallbacks();
+                    };
+                    this.requestComplete = function (isComplete) {
+                        if (isComplete) requestsCompleted++;
+                        if (requestsCompleted == numRequestToComplete) fireCallbacks();
+                    };
+                    this.setCallback = function (callback) {
+                        callBacks.push(callBack);
+                    };
+                };
+            })();
+            var requestCallback = new MyRequestsCompleted({
+                numRequest: 2,
+                singleCallback: function () {
+                    trending_array_both = removeDuplicates(trending_array_both);
+                }
+            });
+
+            //usage in request
+            $.ajax({
+                url: 'http://projectsgono.com/lecro/gethtml.php',
+                type: 'post',
+                data: { "callFunc1": "http://www.jutarnji.hr" },
+                success: function (response) {
+                    trending_array_both = trending_array_both.concat(trendingFindOnline(response, drzavnici));
+                    requestCallback.requestComplete(true);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                   
+                }
+            });
+            $.ajax({
+                url: 'http://projectsgono.com/lecro/gethtml.php',
+                type: 'post',
+                data: { "callFunc1": "http://www.telegram.hr" },
+                success: function (response) {
+                    trending_array_both = trending_array_both.concat(trendingFindOnline(response, drzavnici));
+                    requestCallback.requestComplete(true);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                   
+                }
+            });
+
+            function populateTypeaheadBoxWithAll() {
+
+                var drzavnici_middle_copy = [];
+                $.ajax({
+                    url: 'http://projectsgono.com/lecro/populateboxextended.php',
+                    type: 'POST',
+                    dataType: "json",
+                    success: function (response) {
+
+                        for (var i = 0; i < response.length; i++) {
+                            drzavnici_copy.push(response[i].Ime.trim() + " " + response[i].Prezime.trim()); //copy array
+                            inner_drzavnici = {}
+                            inner_drzavnici["imprezim"] = response[i].Ime.trim() + " " + response[i].Prezime.trim();
+                            inner_drzavnici["ime"] = response[i].Ime;
+                            inner_drzavnici["prezime"] = response[i].Prezime;
+
+                            if (response[i].Ustedevina == null) { inner_drzavnici["ustedevina"] = "0"; }
+                            else { inner_drzavnici["ustedevina"] = response[i].Ustedevina; }
+
+                            if (response[i].Iznos == null || response[i].Iznos==undefined ) { inner_drzavnici["nekretnine"] = "0"; }
+                            else { inner_drzavnici["nekretnine"] = response[i].Iznos; }
+
+                            if (response[i].Placa == null) { inner_drzavnici["placa"] = "0"; }
+                            else { inner_drzavnici["placa"] = response[i].Placa; }
+
+                            if (response[i].brojnekr == null) { inner_drzavnici["broj_nekretnina"] = "0"; }
+                            else { inner_drzavnici["broj_nekretnina"] = response[i].brojnekr; }
+
+                            if (response[i].brojopt== null) { inner_drzavnici["broj_optuznica"] = "0"; }
+                            else { inner_drzavnici["broj_optuznica"] = response[i].brojopt; }
+
+                          //kaj ne bi tu trebalo ici if if if da sve popuni jer onda neke izostavi tipa sve politicare
+                            if (response[i].Filtar == "cro") {
+                                inner_drzavnici["filtar"] = response[i].Filtar.trim();
+                            }
+                            else if (response[i].Filtar == "eu") {
+                                inner_drzavnici["filtar"] = response[i].Filtar.trim();
+                            }
+                            else {
+                                inner_drzavnici["filtar"] = undefined;
+                            }
+
+                            drzavnici.push(inner_drzavnici); //store object in array, moraju biti unutra za kasnije kad ce ponovo uc
+                        }
+                        //ovo bi stvarno trebalo optimizirati, mislim radi ali ono, ne svida mi se, izbjegni nan, i probaj na O(n)
+                        var restore_array = [];
+                        $(".isotope .ikonice").each(function (i, val) { drzavnici_middle_copy.push($(this).find("img").attr("alt")); });
+                        drzavnici_main_middle = populateMainMiddleObjectArray(drzavnici);
+                        for (var i = 12; i < drzavnici_copy.length; i++) { drzavnici_middle_copy.push("nan"); }
+                        for (var i = 0; i < 12; i++) {
+                            for (var j = 0; j < drzavnici_copy.length; j++) {
+
+                                if (drzavnici_copy[j].trim() == drzavnici_middle_copy[i].trim()) {
+                                    restore_array.push(drzavnici_copy[j]);
+                                    drzavnici_copy.splice(j, 1);
+                                }
+                            }
+                        }
+                        var initialtypeahead = new Bloodhound({
+                            datumTokenizer: function (data) {
+                                return Bloodhound.tokenizers.whitespace(data);
+                            },
+                            queryTokenizer: Bloodhound.tokenizers.whitespace,
+                            local: drzavnici_copy
+                        });
+                        initialtypeahead.initialize();
+
+                        typeaheadPopulateFieldsOnReady('drzavnici_copy', initialtypeahead);
+                        drzavnici_copy = drzavnici_copy.concat(restore_array);
+
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert("Unable to get data, try again");
+                        //SET CSS MARGIN HERE FOR URL!!! FOR SOME BROWSERS ONE
+                        
+                    }
+                });
+            }
+
+            $("#trending, #trending2").on("click", function () {
+                if ($("#change-image").attr("src").indexOf("trending") < 0) {
+                    
+                    disableEnableFourCategoriesOnClick("#croatian-parliament", "#euro-parliament", "#everyone", true);
+                    disableEnableFourCategoriesOnClick("#croatian-parliament2", "#euro-parliament2", "#everyone2", true);
+                    checkBarColorAndSet();
+                    unCheckFive();
+                    num_sort = false;
+                    original_sort = true;
+                    $(".typeahead").val("");
+                    blurEuropeanElements("0.4");
+
+                    if (trending_array_both.length != 0) { //trending_array_both je vec napunjen na document.ready
+                        $(".isotope .ikonice").each(function (i, obj) { $(this).fadeIn(1800); });
+
+                        var array01 = chooseTwelvePoliticians(trending_array_both, "trend"); //array01 je za prikaz slika  //izabire prvih 12 politicara
+                        removeLeftIconsDoNotMatchFilter(trending_array_both);
+
+                        $("#change-image").prop("src", "images/indeximage/trending.png").fadeIn(200);  //pojava jedne ikone glavne trending
+                        removeTrendingIconDesign();
+                        if (!($(this).hasClass("trend-add"))) {
+                            $(this).addClass("trend-add");
+                        }
+                        $(".isotope").hide("slide", { direction: "right" }, 600, function () {
+
+                            $(".ikonice").each(function (i, obj) {
+                                if (i < trending_array_both.length) {
+
+                                    $(this).find(".txtimg").text(trending_array_both[i].substring(trending_array_both[i].indexOf(' ') + 1, trending_array_both[i].length) + " " + (trending_array_both[i])[0] + ".");
+                                    $(this).find("img").attr({
+                                        alt: trending_array_both[i],
+                                        src: "images/" + array01[i] + ".jpg"
+                                    });
+                                }
+                            });
+                            drzavnici_main_middle = populateMainMiddleObjectArrayTrendingOnly(drzavnici);
+
+
+                        });
+                        $(".textvalue").each(function (i, obj) {
+                            $(this).hide();
+                        });
+
+                        isotopeSort("original-order", true, '0s');
+                        $(".isotope").show("slide", { direction: "left" }, 900, function () {
+                            disableEnableFourCategoriesOnClick("#croatian-parliament", "#euro-parliament", "#everyone", false);
+                            disableEnableFourCategoriesOnClick("#croatian-parliament2", "#euro-parliament2", "#everyone2", false);
+                        });
+
+                    }
+                    else {
+                        alert("No trending politicians"); //najbolje da se ne mice uopce sredina
+                         //najbolje da se ne mice uopce sredina
+                    }
+                }
+            });
+
+            $("#croatian-parliament,#croatian-parliament2").on("click", function () {
+                if ($("#change-image").attr("src").indexOf("croatia") < 0) {
+                    disableEnableFourCategoriesOnClick("#trending", "#euro-parliament", "#everyone", true);
+                    disableEnableFourCategoriesOnClick("#trending2", "#croatian-parliament2", "#everyone2", true);
+                    checkBarColorAndSet();
+                    unCheckFive();
+                    num_sort = false;
+                    original_sort = true;
+                    unblurEuropeanElements(1);
+                    $(".typeahead").val("");
+                    $('.typeahead').typeahead('destroy');
+                    filter_cro = true;
+                    filter_all = false;
+                    var drzavnici_middle_copy = [];
+                    drzavnici_cro = [];
+                    appendIkoniceItems(drzavnici_main_middle);
+
+                    $(".isotope .ikonice").each(function (i, obj) { $(this).fadeIn(1800); });  //2500 je idealno
+                    isotopeSort("original-order", true, '0s');
+
+                    drzavnici_cro = checkFilterAndPopulate(drzavnici, "cro"); //filtriranje na samo "cro" osobe
+                    var array01 = chooseTwelvePoliticians(drzavnici_cro, "cro"); //array01 je za prikaz slika 
+
+
+                    $("#change-image").prop("src", "images/indeximage/croatia.png").fadeIn(200);
+                    removeTrendingIconDesign();
+                    if (!($(this).hasClass("trend-add"))) {
+                        $(this).addClass("trend-add");
+                    }
+                    $(".isotope").hide("slide", { direction: "right" }, 600, function () {
+
+                        createClosure("trend", array01, "images/", drzavnici_cro);
+                        $(".isotope .ikonice").each(function (i, val) { drzavnici_middle_copy.push($(this).find("img").attr("alt")); });
+                        for (var i = drzavnici_middle_copy.length - 1; i < drzavnici_cro.length; i++) { drzavnici_middle_copy.push("nan"); }
+                        for (var i = 0; i < 12; i++) {
+
+                            for (var j = 0; j < drzavnici_cro.length; j++) {
+
+                                if (drzavnici_cro[j].newnames.trim() == drzavnici_middle_copy[i].trim()) {
+                                    drzavnici_cro.splice(j, 1);
+                                }
+                            }
+                        }
+                        var initialtypeahead = new Bloodhound({
+                            datumTokenizer: function (data) {
+                                return Bloodhound.tokenizers.whitespace(data.newnames);
+                            },
+                            queryTokenizer: Bloodhound.tokenizers.whitespace,
+                            local: drzavnici_cro
+                        });
+                        initialtypeahead.initialize();
+                        typeaheadPopulateFields('drzavnici_cro', 'newnames', initialtypeahead);
+                        drzavnici_main_middle = populateMainMiddleObjectArray(drzavnici); //uvrstavanje vrijednosti
+
+
+                    });
+
+                    $(".textvalue").each(function (i, obj) {
+                        $(this).hide();
+                    });
+
+                    $(".isotope").show("slide", { direction: "left" }, 900, function () {
+                        disableEnableFourCategoriesOnClick("#trending", "#euro-parliament", "#everyone", false);
+                        disableEnableFourCategoriesOnClick("#trending2", "#croatian-parliament2", "#everyone2", false);
+                    });
+                }
+            });
+
+            $("#euro-parliament, #euro-parliament2").click("click", function () {
+                if ($("#change-image").attr("src").indexOf("euro") < 0) {
+                    disableEnableFourCategoriesOnClick("#trending", "#croatian-parliament", "#everyone", true);
+                    disableEnableFourCategoriesOnClick("#trending2", "#croatian-parliament2", "#everyone2", true);
+                    checkBarColorAndSet();
+                    num_sort = false;
+                    original_sort = true;
+                    unCheckFive();
+                    $(".typeahead").val("");
+                    $('.typeahead').typeahead('destroy');
+                    blurEuropeanElements("0.4");
+                    drzavnici_eu = [];
+                    appendIkoniceItems(drzavnici_main_middle);
+
+                    $(".isotope .ikonice").each(function (i, obj) { $(this).fadeIn(1800); });  //2500 je idealno
+                    isotopeSort("original-order", true, '0s');
+
+
+                    drzavnici_eu = checkFilterAndPopulate(drzavnici, "eu"); //returns object
+                    var array01 = chooseTwelvePoliticians(drzavnici_eu, "eu");
+                    removeLeftIconsDoNotMatchFilter(drzavnici_eu);
+
+                    $("#change-image").prop("src", "images/indeximage/euro-parliament.png").fadeIn(200);
+                    removeTrendingIconDesign();
+                    if (!($(this).hasClass("trend-add"))) {
+                        $(this).addClass("trend-add");
+                    }
+                    $(".isotope").hide("slide", { direction: "right" }, 600, function () {
+                        createClosure("trend", array01, "images/eu/", drzavnici_eu);
+
+                       
+                    });
+                    //micanje crvenih znamenki
+                    $(".textvalue").each(function (i, obj) {
+                        $(this).hide();
+                    });
+                    //populacija vrijednosti iz baze
+                    $(".isotope").show("slide", { direction: "left" }, 900, function () {
+                        drzavnici_main_middle = populateMainMiddleObjectArrayEuOnly(drzavnici);
+                        disableEnableFourCategoriesOnClick("#trending", "#croatian-parliament", "#everyone", false);
+                        disableEnableFourCategoriesOnClick("#trending2", "#croatian-parliament2", "#everyone2", false);
+
+                    });
+                }
+
+            });
+
+            $("#everyone, #everyone2").click("click", function () {
+                if ($("#change-image").attr("src").indexOf("group-people") < 0) {
+                    disableEnableFourCategoriesOnClick("#trending", "#euro-parliament", "#croatian-parliament", true);
+                    disableEnableFourCategoriesOnClick("#trending2", "#euro-parliament2", "#croatian-parliament2", true);
+                    checkBarColorAndSet();
+                    num_sort = false;
+                    original_sort = true;
+                    unCheckFive();
+                    $('.typeahead').typeahead('destroy');
+                    $(".typeahead").val("");
+                    unblurEuropeanElements("1");
+                    var drzavnici_middle_copy = [];
+                    var restore_array = [];
+                    filter_cro = false;
+                    filter_all = true;
+                    appendIkoniceItems(drzavnici_main_middle);
+
+                    $(".isotope .ikonice").each(function (i, obj) { $(this).fadeIn(1800); });  //2500 je idealno
+                    isotopeSort("original-order", true, '0s');
+
+                    var array01 = chooseTwelvePoliticians(drzavnici); // vadenje everyone iz drzavnici, prvih 12
+
+                    $("#change-image").prop("src", "images/indeximage/group-people.png").fadeIn(200);
+                    removeTrendingIconDesign();
+                    if (!($(this).hasClass("trend-add"))) {
+                        $(this).addClass("trend-add");
+                    }
+
+                    $(".isotope").hide("slide", { direction: "right" }, 600, function () {
+                        populateMiddleIcons(drzavnici, array01, "none");
+                        $(".isotope .ikonice").each(function (i, val) { drzavnici_middle_copy.push($(this).find("img").attr("alt")); });
+                        for (var i = 12; i < drzavnici_copy.length; i++) { drzavnici_middle_copy.push("nan"); }
+                        for (var i = 0; i < 12; i++) {
+
+                            for (var j = 0; j < drzavnici_copy.length; j++) {
+
+                                if (drzavnici_copy[j].trim() == drzavnici_middle_copy[i].trim()) {
+
+                                    restore_array.push(drzavnici_copy[j]);
+                                    drzavnici_copy.splice(j, 1);
+                                }
+                            }
+                        }
+                        var initialtypeahead = new Bloodhound({
+                            datumTokenizer: function (data) {
+                                return Bloodhound.tokenizers.whitespace(data);
+                            },
+                            queryTokenizer: Bloodhound.tokenizers.whitespace,
+                            local: drzavnici_copy
+                        });
+
+                        initialtypeahead.initialize();
+
+                        typeaheadPopulateFieldsOnReady('drzavnici_copy', initialtypeahead);
+                        drzavnici_copy = drzavnici_copy.concat(restore_array);
+                        drzavnici_main_middle = populateMainMiddleObjectArray(drzavnici);
+
+
+
+                    });
+                    $(".textvalue").each(function (i, obj) {
+                        $(this).hide();
+                    });
+
+                    $(".isotope").show("slide", { direction: "left" }, 900, function () {
+                        disableEnableFourCategoriesOnClick("#trending", "#euro-parliament", "#croatian-parliament", false);
+                        disableEnableFourCategoriesOnClick("#trending2", "#euro-parliament2", "#croatian-parliament2", false);
+                    });
+                }
+            });
+         
+                $container = $('.isotope').isotope({
+                    sortBy: 'original-order',
+                    itemSelector: '.ikonice',
+                    isResizeBound: true,
+                    getSortData: {
+                        number: function (itemElem) {              // ovaj number se preslikava kao globalna varijabla unutar stringa za cijeli html kod.
+                            var weight = $(itemElem).find('.textvalue').text();
+                            return parseFloat(weight.replace(/[\(\)]/g, ''));
+                        }
+                    }
+                });
+                $container.isotope('on', 'layoutComplete', function () {
+                   
+                    $("#Radio0").prop('disabled', false);
+                    $("#Radio1").prop('disabled', false);
+                    disableEnableRadioButtons("#Radio2", "#Radio3", "#Radio4", "#Radio5",false);
+                });
+
+                $("#expand-chart").click(function () {
+                    var isotope_height = $(".isotope").height();
+                    isotope_width = $(".isotope").width() + 12;  //needs to be global because of expand-chart button
+                    $("#chart_div").css({
+                        width: isotope_width,
+                        height: isotope_height
+
+                    });
+                    if (croatian_lang_selected) {
+                        if ($(this).text() == "Proširi") {
+                            $(this).text("Smanji");
+                            drawBasic(drzavnici_main_middle);
+                        }
+                        else {
+                            $("#chart_div").css({
+                                width: isotope_width,
+                                height: "229px"
+                            });
+                            drawBasic(drzavnici_main_middle);
+                            $(this).text("Proširi");
+                        }
+                    }
+                    else if (english_lang_selected) {
+                        if ($(this).text() == "Expand") {
+                            $(this).text("Contract");
+                            drawBasic(drzavnici_main_middle);
+                        }
+                        else {
+                            $("#chart_div").css({
+                                width: isotope_width,
+                                height: "229px"
+                            });
+                            drawBasic(drzavnici_main_middle);
+                            $(this).text("Expand");
+                        }
+                    }
+                });
+
+                // RADIO BUTTON EVENTS BEGIN
+                $("#Radio0").click(function () {  //original button
+                    disableEnableRadioButtons("#Radio1", "#Radio2", "#Radio3", "#Radio4", true);
+                    $("#Radio5").prop('disabled', false);
+                
+                        unCheckFive();
+                        defaultSilverColor();
+
+                        isNumisOrg(false, true);
+                        $(".textvalue").each(function (i, obj) {
+                            $(this).hide();
+                        });
+                        var sortByValue = $(this).attr('data-sort-by');
+                        isotopeSort(sortByValue, true, isotopetime);
+                   
+
+                });
+                $("#Radio1").change(function () {
+                  
+                      
+                        if (this.checked) {
+                            checkboxClicked(true, false, false, false, false);
+                            isNumisOrg(true, false);
+                            if (bar_color == "silver") {
+                                disableEnableRadioButtons("#Radio2", "#Radio3", "#Radio4", "#Radio5", true);
+                                originalButtonShow();
+                                defaultSilverColor();
+                                changeLabelColorSilver('Radio1');
+                                $(".textvalue").each(function (i, obj) {
+                                    $(this).show();
+                                    $(this).text(drzavnici_main_middle[i].ustedevina);
+                                });
+                                isotopeSort("number", false, isotopetime);
+                            }
+                            else if (bar_color == "green") { defaultGreenColor(); changeLabelColorGreen('Radio1'); if (checkIfAnyArrayElementIsNull(drzavnici_main_middle)) { $("#chart_div").show(); } else { $("#chart_div").hide(); } drawBasic(drzavnici_main_middle); }
+                        }
+                   
+                });
+                $("#Radio2").change(function () {
+                  
+                        if (this.checked) {
+                            checkboxClicked(false, true, false, false, false);
+                            isNumisOrg(true, false);
+                            if (bar_color == "silver") {
+                                disableEnableRadioButtons("#Radio1", "#Radio3", "#Radio4", "#Radio5", true);
+                                originalButtonShow();
+                                defaultSilverColor();
+                                changeLabelColorSilver('Radio2');
+                                $(".textvalue").each(function (i, obj) {
+                                    $(this).show();
+                                    $(this).text(drzavnici_main_middle[i].nekretnine);
+                                });
+                                isotopeSort("number", false, isotopetime);
+
+                            }
+                            else if (bar_color == "green") { defaultGreenColor(); changeLabelColorGreen('Radio2'); if (checkIfAnyArrayElementIsNull(drzavnici_main_middle)) { $("#chart_div").show(); } else { $("#chart_div").hide(); } drawBasic(drzavnici_main_middle); }
+                        }
+                    
+                });
+                $("#Radio3").change(function () {
+                   
+                        
+                        if (this.checked) {
+                            checkboxClicked(false, false, true, false, false);
+                            isNumisOrg(true, false);
+                            if (bar_color == "silver") {
+                                disableEnableRadioButtons("#Radio1", "#Radio2", "#Radio4", "#Radio5", true);
+                                originalButtonShow();
+                                defaultSilverColor();
+                                changeLabelColorSilver('Radio3');
+                                $(".textvalue").each(function (i, obj) {
+                                    $(this).show();
+                                    $(this).text(drzavnici_main_middle[i].placa);
+                                });
+                                isotopeSort("number", false, isotopetime);
+                            }
+                            else if (bar_color == "green") { defaultGreenColor(); changeLabelColorGreen('Radio3'); if (checkIfAnyArrayElementIsNull(drzavnici_main_middle)) { $("#chart_div").show(); } else { $("#chart_div").hide(); } drawBasic(drzavnici_main_middle); }
+                        }
+                    
+                });
+                $("#Radio4").change(function () {
+                    
+                      
+                        if (this.checked) {
+                            checkboxClicked(false, false, false, true, false);
+                            isNumisOrg(true, false);
+                            if (bar_color == "silver") {
+                                disableEnableRadioButtons("#Radio1", "#Radio2", "#Radio3", "#Radio5", true);
+                                originalButtonShow();
+                                defaultSilverColor();
+                                changeLabelColorSilver('Radio4');
+                                $(".textvalue").each(function (i, obj) {
+                                    $(this).show();
+                                    $(this).text(drzavnici_main_middle[i].broj_nekretnina);
+                                });
+                                isotopeSort("number", false, isotopetime);
+                            }
+                            else if (bar_color == "green") {
+                                defaultGreenColor(); changeLabelColorGreen('Radio4'); if (checkIfAnyArrayElementIsNull(drzavnici_main_middle)) { $("#chart_div").show(); } else { $("#chart_div").hide(); } drawBasic(drzavnici_main_middle);
+                            }
+                        }
+                    
+                });
+                $("#Radio5").change(function () {
+                 
+                      
+                        if (this.checked) {
+                            checkboxClicked(false, false, false, false, true);
+                            isNumisOrg(true, false);
+                            if (bar_color == "silver") {
+                                disableEnableRadioButtons("#Radio1", "#Radio2", "#Radio3", "#Radio4", true);
+                                originalButtonShow();
+                                defaultSilverColor();
+                                changeLabelColorSilver('Radio5');
+                                $(".textvalue").each(function (i, obj) {
+                                    $(this).show();
+                                    $(this).text(drzavnici_main_middle[i].broj_optuznica);
+                                });
+                                isotopeSort("number", false, isotopetime);
+                            }
+                            else if (bar_color == "green") { defaultGreenColor(); changeLabelColorGreen('Radio5'); if (checkIfAnyArrayElementIsNull(drzavnici_main_middle)) { $("#chart_div").show(); } else { $("#chart_div").hide(); } drawBasic(drzavnici_main_middle); }
+                        }
+                    
+                });
+                //RADIO BUTTON EVENTS END
+
+                //OFF ON SWITCH (Sortiraj) BEGIN
+                $("#myonoffswitch").change(function () {
+                    original_sort = true;
+                    num_sort = false;
+                    
+                    if (this.checked) {
+                        unCheckFive();
+                        $("#chart_div").hide();
+                        $("#switch-chart").hide();
+                        $("#expand-chart").hide();
+                        $("input[type=radio] + label").css({
+                            "border": "1px solid #ccc",
+                            "background": "#efefef",
+                            "color": "#aaa"
+                        });
+                        bar_color = "silver"; 
+                    }
+                    else if (!this.checked) {
+                        if ($("#Radio0").is(":visible")) {
+                            $("#Radio0").hide();
+                        }
+                        unCheckFive();
+                        $("#chart_div").hide();
+                        $("#switch-chart").show();
+                        $("#expand-chart").show();
+                        $(".textvalue").each(function (i, obj) {
+                            $(this).hide();
+                        });
+                        isotopeSort("original-order", true);
+                        $("input[type=radio] + label").css({
+                            "border": "1px solid #5cb85c",
+                            "background": "#DFFFDF",
+                            "color": "#116312"
+                        });
+                        bar_color = "green"; 
+
+                    }
+
+                });
+                // OFF ON SWITCH (Sortiraj) END
+                // GOOGLE CHART SWITCH BEGIN
+                $('#switch-chart').click(function () {
+                    if (croatian_lang_selected) {
+                        if (column_chart) {
+                            switchChartOption(true, false, "Stupčasti graf", "Kružni graf");
+                        }
+                        else if (pie_chart) {
+                            switchChartOption(false, true, "Kružni graf", "Stupčasti graf");
+                        }
+                    }
+                    else if (english_lang_selected) {
+                        if (column_chart) {
+                            switchChartOption(true, false, "Column chart", "Pie chart");
+                        }
+                        else if (pie_chart) {
+                            switchChartOption(false, true, "Pie chart", "Column chart");
+                        }
+                    }
+                });
+            });
+
+            // GOOGLE CHART SWITCH END
+            //END of document.ready
+        </script>
+    <!-- SCRIPT END -->
+</head>
+<body>
+    <aside id="sticky-social">
+        <ul>
+            <li><a href="#" class="entypo-facebook" target="_blank"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
+            <li><a href="#" class="entypo-twitter" target="_blank"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
+            <li><a href="#" class="entypo-instagrem" target="_blank"><i class="fa fa-instagram"></i><span>Instagram</span></a></li>
+            <li><a href="#" class="entypo-gplus" target="_blank"><i class="fa fa-google-plus"></i><span>Google+</span></a></li>
+            <li><a href="#" class="entypo-flickr" target="_blank"><i class="fa fa-flickr"></i><span>Flickr</span></a></li>
+            <li><a href="#" class="entypo-pinterest" target="_blank"><i class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
+            <li><a href="#" class="entypo-tumblr" target="_blank"><i class="fa fa-tumblr"></i><span>Tumblr</span></a></li>
+        </ul>
+    </aside>
+    <!-- HEADER BEGIN -->
+    <div id="heading-title-bootstrap">LeCro</div>
+    <nav class="navbar navbar-default" id="header">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="images/logo/logo.png" class="navbar-brand" width="100" height="100" style="position:relative;" />
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.html" style="background-image: linear-gradient(to bottom,#FCFCFC 0,#FCFCFC 100%);"><p id="heading-title">LeCro</p><span class="sr-only">(current)</span></a></li>
+                   
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Postavke<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li id="icon-animation"><a href="#">Animacija ikona</a><img id="first-check"src="images/indeximage/checkbox.png" /></li>
+                            <li id="back-color"><a href="#">Boja pozadine</a><img id="second-check" src="images/indeximage/checkbox.png" /></li>
+                            <li id="language-but"><a href="#">Jezik</a><img id="third-check" src="images/indeximage/checkbox.png"/></li>
+                            <li class="divider"></li>
+                            <li id="timeline-but"><a href="#">Timeline</a><img id="fourth-check" src="images/indeximage/checkbox.png"/></li>
+                            <li id="category-but"><a href="#">Category</a><img id="fifth-check" src="images/indeximage/checkbox.png"/></li>
+                        </ul>
+                    </li>
+                    <li><a href="vizija.html">Vizija</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Info <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="info.html">Lecro (info)</a></li>
+                            <li><a href="kriterij.html">Podaci (kriterij)</a></li>
+                            <li><a href="impresum.html">Impresum</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="tehnologije.html">Korištene tehnologije</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <!-- HEADER END -->
+    <!-- MAIN SECTION BEGIN-->
+    <!-- SETTINGS BEGIN-->
+    <div id="box-section">
+        <div id="lang-section">
+            <img id="uk-lang" src="images/indeximage/uk.png" alt="UK" />
+            <img id="cro-lang" src="images/indeximage/cro.png" alt="CRO"/>
+        </div>
+        <div class="btn-group btn-toggle timeline-section">
+            <p>Timeline:</p>
+            <button class="btn btn-default">Vertical</button>
+            <button class="btn btn-primary active ">Horizontal</button>
+        </div>
+        <div id="category-section" class="btn-group btn-toggle">
+            <p>Category:</p>
+            <button class="btn btn-default">Vertical</button>
+            <button class="btn btn-primary active ">Horizontal</button>
+        </div>
+    </div>
+    <!-- SETTINGS END-->
+
+    <div id="container-num1" class="container">
+        <!--CPANEL BEGIN slaganje po kolumnama--> 
+        <div class="col-sm-3">
+            <img id="close_left_bar" src="images/indeximage/x-icon.png" alt="Alternate Text" />
+        <div id="arrow-left"></div>
+        <div id="left_side_bar">
+            <ul class="dropdown">
+                <li><a id="trending2" href="#"><i class="icon-envelope icon-large"></i>Trending</a></li>
+                <li><a id="croatian-parliament2" href="#"><i class="icon-truck icon-large"></i>HR.zastupnici </a></li>
+                <li><a id="euro-parliament2" href="#"><i class="icon-plane icon-large"></i>Europarlament</a></li>
+                <li><a id="everyone2" href="#"><i class="icon-plane icon-large"></i>Političari</a></li>
+            </ul>
+        </div>
+            <div id="cpanel">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                            <label class="onoffswitch-label" for="myonoffswitch">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <button id="Radio0" class="btn btn-default" type="button" data-sort-by="original-order">Original</button>
+                    </div>
+                </div>
+
+                <hr />
+                <div id="checkbox-wrapper">
+                    <input id="Radio1" name="Radios" type="radio" class="maincheckbox" data-sort-by="number" value="Option 1">
+                    <label for="Radio1">Ušteđevina</label>
+
+                    <span class="positioning-checkbox">
+                        <input id="Radio2" name="Radios" type="radio" class="maincheckbox" data-sort-by="number" value="Option 2">
+                        <label for="Radio2">Nekretnine</label>
+                    </span>
+                    <span class="positioning-checkbox">
+                        <input id="Radio3" name="Radios" type="radio" class="maincheckbox" data-sort-by="number" value="Option 3">
+                        <label for="Radio3">Plaća</label>
+                    </span>
+                    <span class="positioning-checkbox">
+                        <input id="Radio4" name="Radios" type="radio" class="maincheckbox" data-sort-by="number" value="Option 4">
+                        <label for="Radio4">#nekretnina</label>
+                    </span>
+                    <span class="positioning-checkbox">
+                        <input id="Radio5" name="Radios" type="radio" class="maincheckbox" data-sort-by="number" value="Option 5">
+                        <label for="Radio5">#optužnica</label>
+                    </span>
+
+                </div>
+
+                <p style="display:inline;font-size:15px;">Odaberi:</p>
+                <img id="change-image" src="images/indeximage/croatia.png" />
+                <hr />
+                <div class="typehead-wrapper">
+                    <input class="typeahead">
+                </div>
+                <button id="switch-chart" type="button" class="btn btn-default switch" >Graf (stupac)</button>
+                <button id="expand-chart" type="button" class="btn btn-default switch" >Proširi</button>
+
+            </div>
+
+        </div> 
+        <!--CPANEL END-->
+
+        <!--MIDDLE BEGIN-->
+        <div id="middle" class="col-sm-6">
+            <div class="trending-icons">
+            <img id="trending" class="trends" src="images/indeximage/trending.png" alt="trend"/><p id="trending-text">trending</p>
+            <img id="croatian-parliament" src="images/indeximage/croatia.png" alt="cro" class="trends"/><p id="croatian-text">saborski zastupnici</p>
+            <img id="euro-parliament" src="images/indeximage/euro-parliament.png" alt="euro" class="trends"/><p id="euro-text">euro parlamentarci</p>
+            <img id="everyone" src="images/indeximage/group-people.png"alt="every" class="trends"/><p id="everyone-text">svi političari</p>
+        </div>
+            <div class="isotope">
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+
+                    <img alt="Zoran Milanović" class="headerslike" src="images/zoran_milanovic.jpg" />
+                    <div class="txtimg"> Milanović Z.</div>
+                </div>
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+                    <img alt="Tomislav Karamarko" class="headerslike" src="images/tomislav_karamarko.jpg" />
+
+                    <div class="txtimg"> Karamarko T.</div>
+                </div>
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+                    <img alt="Branko Grčić" class="headerslike" src="images/branko_grcic.jpg" />
+
+                    <div class="txtimg"> Grčić B.</div>
+                </div>
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+                    <img alt="Anka Mrak-Taritaš" class="headerslike" src="images/anka_mrak-taritas.jpg" />
+
+                    <div class="txtimg"> Taritaš A.</div>
+                </div>
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+                    <img alt="Gordan Maras" class="headerslike" src="images/gordan_maras.jpg" />
+
+                    <div class="txtimg"> Maras G.</div>
+                </div>
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+                    <img alt="Ivan Vrdoljak" class="headerslike" src="images/ivan_vrdoljak.jpg" />
+
+                    <div class="txtimg"> Vrdoljak I.</div>
+                </div>
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+                    <img alt="Dragutin Lesar" class="headerslike" src="images/dragutin_lesar.jpg" />
+
+                    <div class="txtimg"> Lesar D.</div>
+                </div>
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+                    <img alt="Siniša Varga" class="headerslike" src="images/sinisa_varga.jpg" />
+
+                    <div class="txtimg"> Varga S.</div>
+                </div>
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+                    <img alt="Božidar Kalmeta" class="headerslike" src="images/bozidar_kalmeta.jpg" />
+
+                    <div class="txtimg"> Kalmeta B.</div>
+                </div>
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+                    <img alt="Mirando Mrsić" class="headerslike" src="images/mirando_mrsic.jpg" />
+
+                    <div class="txtimg"> Mrsić M.</div>
+                </div>
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+                    <img alt="Mirela Holy" class="headerslike" src="images/mirela_holy.jpg" />
+
+                    <div class="txtimg"> Holy M.</div>
+                </div>
+                <div class="ikonice">
+                    <p class="textvalue"></p>
+                    <img alt="Siniša Hajdaš-Dončić" class="headerslike" src="images/sinisa_hajdas_doncic.jpg" />
+
+                    <div class="txtimg"> Dončić S.</div>
+                </div>
+            </div>
+            <div id="chart_div"></div>
+
+        </div>
+        <!--MIDDLE END-->
+        <!--PRESIDENT BEGIN-->
+        <div id="lastcolumn" class="col-sm-3">
+            <div id="presidentsicons-wrapper">
+                <p>Predsjednici</p>
+                <div class="presidenticons">
+                    <img alt="Kolinda Grabar-Kitarović" class="headerslikepres" src="images/kolinda_grabar_kitarovic.jpg" />
+                    <div class="txtimg"> Kitarović K.</div>
+                </div>
+                <div class="presidenticons">
+                    <img alt="Ivo Josipović" class="headerslikepres" src="images/ivo_josipovic.png" />
+                    <div class="txtimg"> Josipović I.</div>
+                </div>
+                <div class="presidenticons">
+                    <img alt="Stjepan Mesić" class="headerslikepres" src="images/stjepan_mesic.jpg" />
+                    <div class="txtimg"> Mesić S.</div>
+                </div>
+            </div>
+
+        </div>        
+       <!--PRESIDENT END-->
+
+    </div>
+    <div id="arrow-left2"></div>
+    <!-- MAIN SECTION END-->
+    <!-- FOOTER0-settings BEGIN-->
+
+    <div id="container-num2" class="container">
+        <img id="close-settings-div" src="images/indeximage/x-icon.png" alt="close" />
+        <div class="left-top-settings">Postavke</div>
+        <div id="footer0" style="text-align:center;">
+            <div id="animation-settings" style="padding-top:10px">
+                <p style="margin-top:10px;">Animacija ikona</p>
+                <div class="[ form-group ]" style="display:inline-block;">
+                    <input type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off">
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-primary" class="[ btn btn-primary ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span>&nbsp;</span>
+                        </label>
+                        <label for="fancy-checkbox-primary" class="[ btn btn-default ]">
+                            pop-up pozadina
+                        </label>
+                    </div>
+                </div>
+
+                <div class="[ form-group ]" style="display:inline-block;">
+                    <input type="checkbox" name="fancy-checkbox-info" id="fancy-checkbox-info" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-info" class="[ btn btn-info ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-info" class="[ btn btn-default ]">
+                            srednja ikona
+                        </label>
+                    </div>
+                </div>
+              
+                <div class="[ form-group ]" style="display:inline-block;">
+                    <input type="checkbox" name="fancy-checkbox-warning" id="fancy-checkbox-warning" autocomplete="off" />
+                    <div class="[ btn-group ]">
+                        <label for="fancy-checkbox-warning" class="[ btn btn-warning ]">
+                            <span class="[ glyphicon glyphicon-ok ]"></span>
+                            <span> </span>
+                        </label>
+                        <label for="fancy-checkbox-warning" class="[ btn btn-default ]">
+                             sortiranje ikona
+                        </label>
+                    </div>
+                </div>
+
+                <p>Okviri</p>
+                <div id="border-settings" class="btn-group btn-toggle" style="margin-bottom:10px">
+                    <button class="btn btn-primary active">ON</button>
+                    <button class="btn btn-default">OFF</button>
+                </div>
+            </div>
+            <div id="squares" style="">
+                <p>Pozadina</p>
+                <div class="background-squares" style="background-color:#EBEBEB;"></div>
+                <div class="background-squares" style="background-color:#999;"></div>
+                <div class="background-squares" style="background-color:#7a9ab6;"></div>
+                <div class="background-squares" style="background-color:#c27a78;"></div>
+                <div class="background-squares" style="background-color:#957c71;"></div>
+                <div class="background-squares" style="background-color:#ccc;"></div>
+            </div>
+        </div>
+    </div> 
+  
+    <!-- FOOTER0 END-->
+    <!-- POP-UP SECTION BEGIN-->
+  
+        <div class="remodal" style="background-color:#e8e8e8;" data-remodal-id="modal">
+            <!--<img src="images/timeline/updown.png" alt="Alternate Text" /> isotope up down on click, later..-->
+            <div class="ikonica">
+                <img id="zmin" alt="" class="popupslike" src="" onclick="" />
+                <div class="txtimgpopup"></div>
+            </div>
+            <div id="fnname"></div>
+            <button id="prikazi-sve" type="button" class="btn btn-primary">Prikaži sve</button>
+            <div id="three-buttons" style="margin-bottom:10px;">
+                <button id="obiljezja" type="button" class="btn btn-success butstyle">Obilježja</button>
+                <button id="optuznice" type="button" class="btn btn-warning butstyle">Optužnice</button>
+                <button id="novac" type="button" class="btn btn-danger butstyle">Novac</button>
+
+            </div>
+            <div id="statistika">Statistika</div>
+            <div id="timeline-pre-section" class="container">
+                <!--container is hidden and centered cause of bootstrap-->
+                <div style="float:left;">
+                    <p id="year-choose">Odaberi godinu:</p>
+                    <select class="form-control dropping-years">
+                    </select>
+                </div>
+               <div style="float:right">
+                    <label id="lab-one" style="display:block;font-size:11px;margin-left:-3px"><input  style="margin-right:2px;" type="checkbox" value=""><span>Naslov</span></label>
+                    <label id="lab-two" style="display:block;margin-left:-11px;font-size:11px;"><input style="margin-right:2px;" type="checkbox" value=""><span>URL</span></label>
+                    <label id="lab-three" style="display:block;margin-left:0px;font-size:11px;"><input  style="margin-right:2px;" type="checkbox" value=""><span>Poredak</span></label>
+               </div>
+            </div>
+            <!-------------------------------------TIMELINE BEGIN-------------------------------------------------------------------->
+           
+             <ul class="timeline"></ul>
+            <img id="scrolluptop" src="images/timeline/arrow-up.png" />
+
+            <!--------------------------------------TIMELINE END--------------------------------------------------------------------->
+
+        </div>
+
+
+    <!-- POP-UP SECTION END-->
+    
+    <div class="footer">&copy; 2016 LeCro. Sva prava pridržana.</div>
+    
+</body>
+</html>

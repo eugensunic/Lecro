@@ -1,0 +1,6 @@
+C:\Users\eugen\Desktop\LECRO-app\Lecro\Lecro\bin\Lecro.dll.config
+C:\Users\eugen\Desktop\LECRO-app\Lecro\Lecro\bin\Lecro.dll
+C:\Users\eugen\Desktop\LECRO-app\Lecro\Lecro\bin\Lecro.pdb
+C:\Users\eugen\Desktop\LECRO-app\Lecro\Lecro\obj\Debug\Lecro.dll
+C:\Users\eugen\Desktop\LECRO-app\Lecro\Lecro\obj\Debug\Lecro.pdb
+C:\Users\eugen\Desktop\LECRO-app\Lecro\Lecro\obj\Debug\Lecro.csprojResolveAssemblyReference.cache

@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Lecro</title>                                                                                       <!-- title enabled -->
+
+    <meta charset="utf-8">                                                                                     <!--all char enabled-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">                                       <!--device enabled-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- STYLESHEET BEGIN-->
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> <!--Ovo je novo-->
+    <link rel="stylesheet" type="text/css" href="css/index.css">                                               <!--HTML BODY DESIGN-->
+    <link rel="shortcut icon" href="/images/logo/logo.ico" />                                                  <!--TITLE ICON IMAGE-->
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css" />   <!--GOOGLE FONT-->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>                  <!--CORE-->
+    <script src="https://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>                                      <!--ENHANCMENT-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>                <!--BOOTSTRAP-->
+    <script src="js/globals.js"></script>
+
+    <style>
+
+         .footer {
+     box-shadow: rgba(0,0,0,0.8) 0 0 10px;
+     position:absolute ;
+     right: 0;
+     bottom: 0 !important;
+     left: 0;
+     padding: 1rem;
+     text-align: center;
+     background: #2E3438;
+     color:white;
+     height: 23px;
+     line-height: 8px;
+     font-size: 13px;
+     
+}
+    </style>
+    <script>
+        $(document).ready(function () {
+            if (english_lang_selected) {
+                alert(english_lang_selected);
+                $(".dropdown + li a").text("Vision");
+                $(".dropdown .dropdown-menu li:first-child a").text("Lecro (info)");
+                $(".dropdown .dropdown-menu li:nth-child(2) a").text("Data (criteria)");
+                $(".dropdown .dropdown-menu li:nth-child(3) a").text("Impresum");
+                $(".dropdown .dropdown-menu li:nth-child(5) a").text("Technologies");
+            }
+            else if (croatian_lang_selected) {
+                alert(croatian_lang_selected);
+                $(".dropdown + li a").text("Vizija");
+                $(".dropdown .dropdown-menu li:first-child a").text("Lecro (info)");
+                $(".dropdown .dropdown-menu li:nth-child(2) a").text("Podaci (kriterij)");
+                $(".dropdown .dropdown-menu li:nth-child(3) a").text("Impresum");
+                $(".dropdown .dropdown-menu li:nth-child(5) a").text("Tehnologije");
+            }
+        });
+    </script>
+</head>
+
+
+<body>
+    <!-- HEADER BEGIN -->
+    <div id="heading-title-bootstrap">LeCro</div>
+    <nav class="navbar navbar-default" id="header">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="images/logo/logo.png" class="navbar-brand" width="100" height="100" style="position:relative;" />
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="index.html" style="background-image: linear-gradient(to bottom,#FCFCFC 0,#FCFCFC 100%);"><p id="heading-title">LeCro</p><span class="sr-only">(current)</span></a></li>
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="vizija.html"></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Info <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="info.html">)</a></li>
+                            <li><a href="kriterij.html">Podaci (kriterij)</a></li>
+                            <li><a href="impresum.html">Impresum</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="tehnologije.html">Korištene tehnologije</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div id="container-num1" class="container"> </div>
+    <div class="footer">&copy; 2016 LeCro. Sva prava pridržana.</div>
+</body>
+</html>
