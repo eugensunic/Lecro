@@ -27,9 +27,8 @@
                 (text[z - 1] == "l" && text[z] == "." && text[z - 2] == "č") ||
                 (text[z - 1] == "t" && text[z] == "." && text[z - 2] == "s") ||
                 (text[z - 1] == "r" && text[z] == "." && text[z - 2] == "b") ||
-                (text[z - 1] == "j" && text[z] == "." && text[z - 2] == "t"))
-                return true;
-            else { false;}
+                (text[z - 1] == "j" && text[z] == "." && text[z - 2] == "t")){ return true; }
+            return false
             
         }
         function getPage() {
@@ -56,7 +55,6 @@
             }
 
             else {
-                alert();
                 var firstandposition = string_text.indexOf('&') + 1;
                 alert((string_text.substring(string_text.indexOf('q') + 2, string_text.indexOf('&', firstandposition))));
                 return (string_text.substring(string_text.indexOf('q') + 2, string_text.indexOf('&', firstandposition)));
