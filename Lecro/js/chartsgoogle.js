@@ -18,25 +18,25 @@ function drawBasic(array1) {
        
         data.setValue(parseInt(j), 0, array1[j].imprezim);
         //alert(array1[j].imprezim);
-        if (ustedevina == true) {
+        if (ustedevina) {
             checkNullAndK(array1,j);
            
             data.setValue(parseInt(j), 1, array1[j].ustedevina);
         }
-        else if (nekretnine == true) {
+        else if (nekretnine) {
             checkNullAndK(array1, j);
        
             data.setValue(parseInt(j), 1, array1[j].nekretnine);
         }
-        else if (placa == true) {
+        else if (placa) {
             checkNullAndK(array1, j);
             data.setValue(parseInt(j), 1, array1[j].placa);
         }
-        else if (broj_nekretnina == true) {
+        else if (broj_nekretnina) {
             checkNullAndK(array1, j);
             data.setValue(parseInt(j), 1, array1[j].broj_nekretnina);
         }
-        else if (broj_optuznica == true) {
+        else if (broj_optuznica) {
             checkNullAndK(array1, j);
             data.setValue(parseInt(j), 1, array1[j].broj_optuznica);
         }
@@ -88,13 +88,13 @@ function drawBasic(array1) {
     chart.draw(data, options);
 }
 function checkNullAndK(array1,index) {
-    if (ustedevina == true) {
+    if (ustedevina) {
         if ((array1[index].ustedevina) == null || (array1[index].ustedevina) == undefined) { array1[index].ustedevina = "0"; }
         else if ((array1[index].ustedevina)[array1[index].ustedevina.length - 1] == "K") {
             array1[index].ustedevina = array1[index].ustedevina.substr(0, array1[index].ustedevina.length - 1);
         }
     }
-    else if (nekretnine == true) {
+    else if (nekretnine) {
         //alert(array1[index].nekretnine);
         if ((array1[index].nekretnine) == null || (array1[index].nekretnine) == undefined) { array1[index].nekretnine = "0"; }
         else if ((array1[index].nekretnine)[array1[index].nekretnine.length - 1] == "K") {
@@ -105,20 +105,20 @@ function checkNullAndK(array1,index) {
       
         
     }
-     else if (placa == true) {
+     else if (placa) {
         if ((array1[index].placa) == null || (array1[index].placa) == undefined) { array1[index].placa = "0"; }
        else  if ((array1[index].placa)[array1[index].placa.length - 1] == "K") {
             array1[index].placa = array1[index].placa.substr(0, array1[index].placa.length - 1);
         }
     }
-     else if (broj_nekretnina == true) {
+     else if (broj_nekretnina) {
         if ((array1[index].broj_nekretnina) == null || (array1[index].broj_nekretnina) == undefined) { array1[index].broj_nekretnina = "0"; }
 
        else  if ((array1[index].broj_nekretnina)[array1[index].broj_nekretnina.length - 1] == "K") {
             array1[index].broj_nekretnina = array1[index].broj_nekretnina.substr(0, array1[index].broj_nekretnina.length - 1);
         }
     }
-    else if (broj_optuznica == true) {
+    else if (broj_optuznica) {
         if ((array1[index].broj_optuznica) == null || (array1[index].broj_optuznica) == undefined) { array1[index].broj_optuznica = "0"; }
        else  if ((array1[index].broj_optuznica)[array1[index].broj_optuznica.length - 1] == "K") {
             array1[index].broj_optuznica = array1[index].broj_optuznica.substr(0, array1[index].broj_optuznica.length - 1);
