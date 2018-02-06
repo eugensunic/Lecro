@@ -16,7 +16,7 @@ function isotopeSort(value, asc_dsc,transition_time) {
 //check if all settings are hidden
 function ifAllSettingsHidden() {
     if ($("#animation-settings").is(":visible") && $("#squares").is(':visible')) { return false; }
-    else { return true; }
+   return true; 
 }
 function getBackgroundColor(colorval) {
     var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
@@ -60,20 +60,10 @@ function closeSettings() {
     $("#animation-settings").hide();
     $("#border-settings").hide();
     $("#squares").hide();
-   //if ( $("#lang-section").is(":visible")){
-   //     //check if visible 
-   //    $("#lang-section").hide();
-   //}
-    $("#close-settings-div").hide();
-    //if ($(".timeline-section").is(":visible")) {
-    //    $(".timeline-section").hide();
-    //}
-    //if ($("#fourth-check").is(":visible")) {
 
-    //    $(this).hide();
-    //}
+    $("#close-settings-div").hide();
+
     $("#arrow-left2").show();
-    //$("#container-num2").hide();
     $("#container-num2").css("visibility", "hidden");
     $(".left-top-settings").css("visibility", "hidden");
 
