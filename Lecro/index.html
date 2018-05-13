@@ -474,6 +474,7 @@
           var restore_array = [];
           filter_cro = false;
           filter_all = true;
+          //console.log(JSON.stringify(drzavnici_main_middle))
           appendIkoniceItems(drzavnici_main_middle);
 
           $(".isotope .ikonice").each(function(i, obj) {
@@ -482,20 +483,44 @@
           isotopeSort("original-order", true, '0s');
 
           var array01 = chooseTwelvePoliticians(drzavnici); // vadenje everyone iz drzavnici, prvih 12
+          array01 = ['zoran_milanovic', 'tomislav_karamarko', 'jozo_rados', 'ivan_suker', 'gordan_maras', 'jadranka_kosor', 'dragutin_lesar', 'milan_bandic', 'bozidar_kalmeta', 'mirando_mrsic', 'mirela_holy', 'slavko_linic'];
+
 
           $("#change-image").prop("src", "images/indeximage/group-people.png").fadeIn(200);
           removeTrendingIconDesign();
           if (!($(this).hasClass("trend-add"))) {
             $(this).addClass("trend-add");
           }
-
+          // fixed elements so that all policians can be the same on opening
+          var arrayxy = ["Zoran Milanović", "Tomislav Karamarko", "Jozo Radoš", "Ivan Šuker", "Gordan Maras", "Jadranka Kosor", "Dragutin Lesar", "Milan Bandić", "Božidar Kalmeta", "Mirando Mrsić", "Mirela Holy",
+            "Slavko Linić"
+          ];
+          var arrayzy = ["Milanović Z.", " Karamarko T.", "Radoš J.", "Šuker I.", "Maras G.", "Kosor J.", "Lesar D.", "Bandić M.", "Kalmeta B.", "Mrsić M.", "Holy M.",
+            "Slavko Linić"
+          ];
           $(".isotope").hide("slide", {
             direction: "right"
           }, 600, function() {
             populateMiddleIcons(drzavnici, array01, "none");
+
+            // doing it again beacuse there is a bug...
             $(".isotope .ikonice").each(function(i, val) {
+
+              $(this)
+                .find('.txtimg')
+                .text(
+                  arrayzy[i]
+                );
+              $(this)
+                .find('img')
+                .attr({
+                  alt: arrayxy[i],
+                  src: 'images/' + array01[i] + '.jpg'
+                });
               drzavnici_middle_copy.push($(this).find("img").attr("alt"));
             });
+
+
             for (var i = 12; i < drzavnici_copy.length; i++) {
               drzavnici_middle_copy.push("nan");
             }
@@ -510,6 +535,7 @@
                 }
               }
             }
+
             var initialtypeahead = new Bloodhound({
               datumTokenizer: function(data) {
                 return Bloodhound.tokenizers.whitespace(data);
@@ -1112,15 +1138,15 @@
         </div>
         <div class="ikonice">
           <p class="textvalue"></p>
-          <img alt="Branko Grčić" class="headerslike" src="images/branko_grcic.jpg" />
+          <img alt="Jozo Radoš" class="headerslike" src="images/jozo_rados.jpg" />
 
-          <div class="txtimg"> Grčić B.</div>
+          <div class="txtimg"> Radoš J.</div>
         </div>
         <div class="ikonice">
           <p class="textvalue"></p>
-          <img alt="Anka Mrak-Taritaš" class="headerslike" src="images/anka_mrak-taritas.jpg" />
+          <img alt="Ivan Šuker" class="headerslike" src="images/ivan_suker.jpg" />
 
-          <div class="txtimg"> Taritaš A.</div>
+          <div class="txtimg"> Šuker I.</div>
         </div>
         <div class="ikonice">
           <p class="textvalue"></p>
@@ -1130,9 +1156,9 @@
         </div>
         <div class="ikonice">
           <p class="textvalue"></p>
-          <img alt="Ivan Vrdoljak" class="headerslike" src="images/ivan_vrdoljak.jpg" />
+          <img alt="Jadranka Kosor" class="headerslike" src="images/jadranka_kosor.jpg" />
 
-          <div class="txtimg"> Vrdoljak I.</div>
+          <div class="txtimg"> Kosor J.</div>
         </div>
         <div class="ikonice">
           <p class="textvalue"></p>
@@ -1142,9 +1168,9 @@
         </div>
         <div class="ikonice">
           <p class="textvalue"></p>
-          <img alt="Siniša Varga" class="headerslike" src="images/sinisa_varga.jpg" />
+          <img alt="Milan Bandić" class="headerslike" src="images/milan_bandic.jpg" />
 
-          <div class="txtimg"> Varga S.</div>
+          <div class="txtimg"> Bandić M.</div>
         </div>
         <div class="ikonice">
           <p class="textvalue"></p>
@@ -1166,9 +1192,9 @@
         </div>
         <div class="ikonice">
           <p class="textvalue"></p>
-          <img alt="Siniša Hajdaš-Dončić" class="headerslike" src="images/sinisa_hajdas_doncic.jpg" />
+          <img alt="Slavko Linić" class="headerslike" src="images/slavko_linic.jpg" />
 
-          <div class="txtimg"> Dončić S.</div>
+          <div class="txtimg"> Linić S.</div>
         </div>
       </div>
       <div id="chart_div"></div>
