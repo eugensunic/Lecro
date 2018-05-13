@@ -1,48 +1,46 @@
 ﻿body {
-     background-color: #EBEBEB;
+  background-color: #ebebeb;
 }
-div.container,div.row{
-  border:1px solid black !important;
-   
+div.container,
+div.row {
+  border: 1px solid black !important;
 }
-#first{
-   width:100%; 
-   height:200px; 
-   padding:3px;
-   margin:5px;
+#first {
+  width: 100%;
+  height: 200px;
+  padding: 3px;
+  margin: 5px;
 }
-#second{
-   width:100%;
-   height:200px; 
-   
+#second {
+  width: 100%;
+  height: 200px;
 }
-.left-top-settings{
-    background-color:dimgrey;
-    color:white;
-    width:80px;
-    height:20px;
-    margin:0px;
-    padding:0px;
+.left-top-settings {
+  background-color: dimgrey;
+  color: white;
+  width: 80px;
+  height: 20px;
+  margin: 0px;
+  padding: 0px;
 }
-#buttons{
-    padding:5px;
+#buttons {
+  padding: 5px;
 }
-.stats-style{
-    font-weight:600;
+.stats-style {
+  font-weight: 600;
 }
 .input-append .btn.dropdown-toggle {
-    float: none;
+  float: none;
 }
-#added-paragraph-down{
-    float:left;
+#added-paragraph-down {
+  float: left;
 }
-#wordsbutton{
-   
-    margin: 20px -76px; 
-    position:relative;
-    top:50%; 
-    left:50%;
+#wordsbutton {
+  margin: 20px -76px;
+  position: relative;
+  top: 50%;
+  left: 50%;
 }
-#time-interval{
-    font-size: 24px;
+#time-interval {
+  font-size: 24px;
 }

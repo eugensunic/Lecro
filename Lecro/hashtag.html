@@ -1,233 +1,265 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
+
 <head>
-    <title>Lecro</title>                                                                <!-- title enabled -->
+  <title>Lecro</title>
+  <!-- title enabled -->
 
-    <meta charset="utf-8">                                                              <!--all char enabled-->
-    <meta name="viewport" content="width=device-width, initial-scale=1">                <!--device enabled-->
-    <!-- STYLESHEET BEGIN-->
+  <meta charset="utf-8">
+  <!--all char enabled-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--device enabled-->
+  <!-- STYLESHEET BEGIN-->
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> <!--Ovo je novo-->
-    <link rel="stylesheet" type="text/css" href="css/index.css">                        <!--HTML BODY DESIGN-->
-    <link rel="stylesheet" href="popupwindow/src/jquery.remodal.css">                   <!--POP UP DESIGN-->
-    <link href="css/timeline.css" rel="stylesheet">                                     <!--TIMELINE DESIGN-->
-    <link href="css/typeaheading.css" rel="stylesheet">                                 <!--TYPEAHEAD DESIGN-->
-    <link href="css/isotoping.css" rel="stylesheet">                                    <!--ISOTOPE DESIGN-->
-    <link href="css/graphing.css" rel="stylesheet">                                     <!--GRAPH DESIGN-->
-    <link href="css/resolution.css" rel="stylesheet">                                   <!--RESOLUTION ADJUST-->
-    <link rel="shortcut icon" href="/images/title_icon.ico" />                          <!--TITLE ICON IMAGE-->
-    <!-- STYLESHEET END -->
-    <!-- SCRIPT BEGIN (https mandatory) -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <!--Ovo je novo-->
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <!--HTML BODY DESIGN-->
+  <link rel="stylesheet" href="popupwindow/src/jquery.remodal.css">
+  <!--POP UP DESIGN-->
+  <link href="css/timeline.css" rel="stylesheet">
+  <!--TIMELINE DESIGN-->
+  <link href="css/typeaheading.css" rel="stylesheet">
+  <!--TYPEAHEAD DESIGN-->
+  <link href="css/isotoping.css" rel="stylesheet">
+  <!--ISOTOPE DESIGN-->
+  <link href="css/graphing.css" rel="stylesheet">
+  <!--GRAPH DESIGN-->
+  <link href="css/resolution.css" rel="stylesheet">
+  <!--RESOLUTION ADJUST-->
+  <link rel="shortcut icon" href="/images/title_icon.ico" />
+  <!--TITLE ICON IMAGE-->
+  <!-- STYLESHEET END -->
+  <!-- SCRIPT BEGIN (https mandatory) -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>                <!--CORE-->
-    <script src="https://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>                                    <!--ENHANCMENT-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>              <!--BOOTSTRAP-->
-    <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>       <!--TYPEAHEAD-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.1/isotope.pkgd.min.js"></script>  <!--ISOTOPE-v2-->
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>                              <!--GOOGLE-CHARTS-->
-    <script src="js/globals.js"></script>                                                                    <!--GLOBAL VARIABLES-->
-    <script src="js/chartsgoogle.js"></script>                                                               <!--COLUMN_PIE_MANIPULATION_GOOGLE_CHARTS-->
-    <script src="popupwindow/src/jquery.remodal.js"></script>                                                <!--POP-UP-->
-    <script src="js/animate.js"></script>                                                                    <!--ANIMATE TO CENTER-->
-    <script src="js/addicon.js"></script>                                                                    <!--TYPEAHEAD ADD ICON-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!--CORE-->
+  <script src="https://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+  <!--ENHANCMENT-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <!--BOOTSTRAP-->
+  <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+  <!--TYPEAHEAD-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.1/isotope.pkgd.min.js"></script>
+  <!--ISOTOPE-v2-->
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <!--GOOGLE-CHARTS-->
+  <script src="js/globals.js"></script>
+  <!--GLOBAL VARIABLES-->
+  <script src="js/chartsgoogle.js"></script>
+  <!--COLUMN_PIE_MANIPULATION_GOOGLE_CHARTS-->
+  <script src="popupwindow/src/jquery.remodal.js"></script>
+  <!--POP-UP-->
+  <script src="js/animate.js"></script>
+  <!--ANIMATE TO CENTER-->
+  <script src="js/addicon.js"></script>
+  <!--TYPEAHEAD ADD ICON-->
 
-    <script>
-        $(document).ready(function () {
+  <script>
+    $(document).ready(function() {
 
-        });
-    </script>
-    
+    });
+  </script>
+
 </head>
+
 <body>
-    <!-- HEADER BEGIN -->
-    <div id="heading-title-bootstrap">LeCro</div>
-    <nav class="navbar navbar-default" id="header">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+  <!-- HEADER BEGIN -->
+  <div id="heading-title-bootstrap">LeCro</div>
+  <nav class="navbar navbar-default" id="header">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <img src="images/logo.png" class="navbar-brand" width="100" height="100" style="position:relative;" />
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#"><p id="heading-title">LeCro</p><span class="sr-only">(current)</span></a></li>
-                    <li><a href="euro.html">LeCro (EU)</a></li>
-                    <li><a href="www.index.hr"></a></li>
-                    <li><a href="www.index.hr">Zanimljivosti</a></li>
+        <img src="images/logo.png" class="navbar-brand" width="100" height="100" style="position:relative;" />
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active">
+            <a href="#">
+              <p id="heading-title">LeCro</p><span class="sr-only">(current)</span></a>
+          </li>
+          <li><a href="euro.html">LeCro (EU)</a></li>
+          <li><a href="www.index.hr"></a></li>
+          <li><a href="www.index.hr">Zanimljivosti</a></li>
 
-                </ul>
+        </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Postavke<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Animacija ikona</a></li>
-                            <li><a href="#">Promjena pozadine</a></li>
-                            <li><a href="#">Jezik</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Korištene tehnologije</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Vizija</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Info <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Lecro (info)</a></li>
-                            <li><a href="#">Podaci (kriterij)</a></li>
-                            <li><a href="#">Impresum</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Korištene tehnologije</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-    <!-- HEADER END -->
-    <div class="container">
-      <div class="row">
-         <div class="col-sm-3">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Postavke<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Animacija ikona</a></li>
+              <li><a href="#">Promjena pozadine</a></li>
+              <li><a href="#">Jezik</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Korištene tehnologije</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Vizija</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Info <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Lecro (info)</a></li>
+              <li><a href="#">Podaci (kriterij)</a></li>
+              <li><a href="#">Impresum</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Korištene tehnologije</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+  <!-- HEADER END -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
         <button type="button" class="btn btn-default">Afere</button>
         <div class="list-group">
-            <a href="#" class="list-group-item"></a>
-            <a href="#" class="list-group-item"></a>
-            <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item"></a>
         </div>
-       </div>
-          <div class="col-sm-3">
-              <button type="button" class="btn btn-default">Poznavanje eng. jezika</button>
-              <div class="list-group">
-                  <a href="#" class="list-group-item"></a>
-                  <a href="#" class="list-group-item">Second item</a>
-                  <a href="#" class="list-group-item">Third item</a>
-              </div>
-          </div>
-          <div class="col-sm-3">
-              <button type="button" class="btn btn-default" style="text-align:center;">Stupanj obrazovanja</button>
-              <div class="list-group">
-                  <a href="#" class="list-group-item">First item</a>
-                  <a href="#" class="list-group-item">Second item</a>
-                  <a href="#" class="list-group-item">Third item</a>
-              </div>
-          </div>
-          <div class="col-sm-3">
-              <button type="button" class="btn btn-default">Karijera u inozemstvu</button>
-              <div class="list-group">
-                  <a href="#" class="list-group-item">First item</a>
-                  <a href="#" class="list-group-item">Second item</a>
-                  <a href="#" class="list-group-item">Third item</a>
-              </div>
-          </div>
       </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Najviše govora u saboru</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item"></a>
-                    <a href="#" class="list-group-item"></a>
-                    <a href="#" class="list-group-item"></a>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Najmanje govora u saboru</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item"></a>
-                    <a href="#" class="list-group-item">Second item</a>
-                    <a href="#" class="list-group-item">Third item</a>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Vjernici</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">First item</a>
-                    <a href="#" class="list-group-item">Second item</a>
-                    <a href="#" class="list-group-item">Third item</a>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Nevjernici (agonostik, ateist)</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">First item</a>
-                    <a href="#" class="list-group-item">Second item</a>
-                    <a href="#" class="list-group-item">Third item</a>
-                </div>
-            </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Poznavanje eng. jezika</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Neobrazovani</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item"></a>
-                    <a href="#" class="list-group-item"></a>
-                    <a href="#" class="list-group-item"></a>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Financijeri političara</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item"></a>
-                    <a href="#" class="list-group-item">Second item</a>
-                    <a href="#" class="list-group-item">Third item</a>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Propali političari</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">First item</a>
-                    <a href="#" class="list-group-item">Second item</a>
-                    <a href="#" class="list-group-item">Third item</a>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Karijera u inozemstvu</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">First item</a>
-                    <a href="#" class="list-group-item">Second item</a>
-                    <a href="#" class="list-group-item">Third item</a>
-                </div>
-            </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default" style="text-align:center;">Stupanj obrazovanja</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item">First item</a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
         </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Duljina karijere</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item"></a>
-                    <a href="#" class="list-group-item"></a>
-                    <a href="#" class="list-group-item"></a>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Iznenađujuće zanimljivosti</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item"></a>
-                    <a href="#" class="list-group-item">Second item</a>
-                    <a href="#" class="list-group-item">Third item</a>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Bivši komunisti</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">First item</a>
-                    <a href="#" class="list-group-item">Second item</a>
-                    <a href="#" class="list-group-item">Third item</a>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-default">Failovi</button>
-                <div class="list-group">
-                    <a href="#" class="list-group-item">First item</a>
-                    <a href="#" class="list-group-item">Second item</a>
-                    <a href="#" class="list-group-item">Third item</a>
-                </div>
-            </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Karijera u inozemstvu</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item">First item</a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
         </div>
+      </div>
     </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Najviše govora u saboru</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item"></a>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Najmanje govora u saboru</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Vjernici</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item">First item</a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Nevjernici (agonostik, ateist)</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item">First item</a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Neobrazovani</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item"></a>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Financijeri političara</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Propali političari</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item">First item</a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Karijera u inozemstvu</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item">First item</a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Duljina karijere</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item"></a>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Iznenađujuće zanimljivosti</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item"></a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Bivši komunisti</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item">First item</a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-default">Failovi</button>
+        <div class="list-group">
+          <a href="#" class="list-group-item">First item</a>
+          <a href="#" class="list-group-item">Second item</a>
+          <a href="#" class="list-group-item">Third item</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>
