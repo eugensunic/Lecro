@@ -1,243 +1,233 @@
-#scrolluptop{
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    right:30px;
-    bottom:25px;
-   
+#scrolluptop {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 30px;
+  bottom: 25px;
 }
 #scrolluptop:hover {
-    cursor:pointer;
-    border-radius:2px;
-    box-shadow: 0 0 4px 0 #333;
-    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-    transition: border linear 0.2s, box-shadow linear 0.2s;
+  cursor: pointer;
+  border-radius: 2px;
+  box-shadow: 0 0 4px 0 #333;
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
 }
 #fnname {
-    position: relative;
-    margin-top: 30px;
+  position: relative;
+  margin-top: 30px;
 }
-#prikazi-sve{
-    margin-top: 10px;
-    width: 150px;
-    margin-bottom: 10px;
-    font-size:13px;
+#prikazi-sve {
+  margin-top: 10px;
+  width: 150px;
+  margin-bottom: 10px;
+  font-size: 13px;
 }
-div.three-buttons{
-    margin-bottom:10px !important;
+div.three-buttons {
+  margin-bottom: 10px !important;
 }
-#obiljezja{
-    margin-right:10px;
+#obiljezja {
+  margin-right: 10px;
 }
-#optuznice{
-    margin-right:10px;
+#optuznice {
+  margin-right: 10px;
 }
-#novac{
-
+#novac {
 }
-#statistika{
-    position: relative;
-    width: 20%;
-    border: 1px solid black;
-    color: white;
-    background-color: grey;
-    word-wrap: break-word;
-    min-width:75px;
-    border-radius:2px;
-    font-size:13px;
-    height:20px;
-    margin-bottom:5px;
-
+#statistika {
+  position: relative;
+  width: 20%;
+  border: 1px solid black;
+  color: white;
+  background-color: grey;
+  word-wrap: break-word;
+  min-width: 75px;
+  border-radius: 2px;
+  font-size: 13px;
+  height: 20px;
+  margin-bottom: 5px;
 }
-#statistika:hover{
-    cursor:pointer;
-    opacity:0.8;
-     
+#statistika:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
-#timeline-pre-section{
-   
-    width: 100%;
-    margin: 0 auto;
-    visibility:hidden;
-    margin-bottom:-20px;
-
+#timeline-pre-section {
+  width: 100%;
+  margin: 0 auto;
+  visibility: hidden;
+  margin-bottom: -20px;
 }
-#year-choose{
-     display:block;
+#year-choose {
+  display: block;
 }
-.timeline-right-section{
-    margin-right:2px;
+.timeline-right-section {
+  margin-right: 2px;
 }
 
-.timeline{
-    background-position: center; 
-    background-repeat: repeat-y;
-    max-width: 960px;
-    margin: -30px auto;
-    position: relative;
-    height: auto;
-    padding: 0px;
-    clear: both;
-    overflow: hidden;
-    margin-top: 10px;
+.timeline {
+  background-position: center;
+  background-repeat: repeat-y;
+  max-width: 960px;
+  margin: -30px auto;
+  position: relative;
+  height: auto;
+  padding: 0px;
+  clear: both;
+  overflow: hidden;
+  margin-top: 10px;
 }
-.year{
-   
-    width: 55px;
-    height: 27px;
-    margin: 0 auto;
-    border-radius: 3px;
-    background-color: #fff;
-    text-align: center;
-    box-shadow: 2px 2px 2px #888888;
-    -moz-box-shadow: 2px 2px 2px #888888;
-    -webkit-box-shadow: 2px 2px 2px #888888;
-    margin-bottom: 10px;
-    line-height: 1.6;
-    border: 1px solid black;
-    font-size:17px;
+.year {
+  width: 55px;
+  height: 27px;
+  margin: 0 auto;
+  border-radius: 3px;
+  background-color: #fff;
+  text-align: center;
+  box-shadow: 2px 2px 2px #888888;
+  -moz-box-shadow: 2px 2px 2px #888888;
+  -webkit-box-shadow: 2px 2px 2px #888888;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  border: 1px solid black;
+  font-size: 17px;
 }
-.year:hover{
-    cursor:pointer;
+.year:hover {
+  cursor: pointer;
 }
- .year:first-child{
-	margin-top:0px;
+.year:first-child {
+  margin-top: 0px;
 }
- .year, .event{
-	list-style-type: none;
-	z-index: 999;
+.year,
+.event {
+  list-style-type: none;
+  z-index: 999;
 }
- .event{
-    width: 60%;
-    background-color: #fff;
-	margin-bottom: 20px;
-	padding: 0px;
-	position: relative;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-color: #e5e6e9 #dfe0e4 #d0d1d5;
-    border-image: none;
-    border-style: solid;
-    border-width: 1px;
-    margin-left:19.5%;
+.event {
+  width: 60%;
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 0px;
+  position: relative;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+  border-image: none;
+  border-style: solid;
+  border-width: 1px;
+  margin-left: 19.5%;
 }
- .date-post{
-    position: relative;
-    color: white;
-    background-color: grey;
-    float: left;
-    word-wrap: break-word;
-    padding: 0px 1px;
-    font-size: 14px;
-    width: auto;
-    margin-right:2px;
+.date-post {
+  position: relative;
+  color: white;
+  background-color: grey;
+  float: left;
+  word-wrap: break-word;
+  padding: 0px 1px;
+  font-size: 14px;
+  width: auto;
+  margin-right: 2px;
 }
 
 /*DODATAK
 -----------------------------------------------------------------------------------------------------*/
 
-.heading-timeline{
-  
-    float: left;
-    width: auto;
-    font-size:13px;
-    color: rgba(191, 56, 56, 0.83);
-    margin-right: 2px;
-    margin-left:1px;
+.heading-timeline {
+  float: left;
+  width: auto;
+  font-size: 13px;
+  color: rgba(191, 56, 56, 0.83);
+  margin-right: 2px;
+  margin-left: 1px;
 }
-.url-timeline{
-
-    text-align:left;
-    font-size:13px;
-    color: #5980DD;
-    margin-right: 2px;
-    margin-left:1px;
+.url-timeline {
+  text-align: left;
+  font-size: 13px;
+  color: #5980dd;
+  margin-right: 2px;
+  margin-left: 1px;
 }
-.heading-response{
-    
-    text-align: left;
-    word-wrap: break-word;
-    font-size:13px;
+.heading-response {
+  text-align: left;
+  word-wrap: break-word;
+  font-size: 13px;
 }
 
 /*EXTRA STYLE*/
-.dropping-years{
-    width: 80px;
-    height: 35px;
-    font-size: 12px !important;
+.dropping-years {
+  width: 80px;
+  height: 35px;
+  font-size: 12px !important;
 }
 
-.butstyle{
-    margin-right: 10px;
-    height: 30px;
-    line-height: 1;
-    font-size:13px;
+.butstyle {
+  margin-right: 10px;
+  height: 30px;
+  line-height: 1;
+  font-size: 13px;
 }
-.checkbox-timeline{
-    min-height: 20px;
-    padding-left: 20px;
-    margin-bottom: 0;
-    font-weight: 400;
-    cursor: pointer;
+.checkbox-timeline {
+  min-height: 20px;
+  padding-left: 20px;
+  margin-bottom: 0;
+  font-weight: 400;
+  cursor: pointer;
 }
-a{
-    color: #23527c;
-    text-decoration: none !important;
+a {
+  color: #23527c;
+  text-decoration: none !important;
 }
-a:visited{
-    text-decoration:none !important;
-    
+a:visited {
+  text-decoration: none !important;
 }
-a:focus, a:hover {
-    color: #23527c;
-    text-decoration: none !important;
-    cursor:auto;
-    color:#182a3c;
+a:focus,
+a:hover {
+  color: #23527c;
+  text-decoration: none !important;
+  cursor: auto;
+  color: #182a3c;
 }
-
 
 /*full bootstrap fix*/
 @media only screen and (max-width: 272px) {
-    #lab-two {
-        margin-left: 0px !important;
-    }
+  #lab-two {
+    margin-left: 0px !important;
+  }
 
-    #fnname {
-        position: relative !important;
-        margin-top: 0px !important;
-        font-size: 14px !important;
-    }
+  #fnname {
+    position: relative !important;
+    margin-top: 0px !important;
+    font-size: 14px !important;
+  }
 
-    #zmin {
-        /* display: inline-block; */
-        width: 100px !important;
-        height: 100px !important;
-        border-radius: 75px !important;
-    }
+  #zmin {
+    /* display: inline-block; */
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 75px !important;
+  }
 
-    #statistika {
-        font-size: 12px;
-        height: 17px;
-        margin-bottom: 5px;
-    }
+  #statistika {
+    font-size: 12px;
+    height: 17px;
+    margin-bottom: 5px;
+  }
 
-    .butstyle {
-        margin-right: 10px;
-        height: 25px;
-        line-height: 1;
-        font-size: 11px;
-    }
-    #prikazi-sve {
-        font-size:11px;
-        width:76px;
-    }
+  .butstyle {
+    margin-right: 10px;
+    height: 25px;
+    line-height: 1;
+    font-size: 11px;
+  }
+  #prikazi-sve {
+    font-size: 11px;
+    width: 76px;
+  }
 }
 @media only screen and (max-width: 499px) {
-    .event{
-        width:100%;
-        margin-left:0px;
-    }
+  .event {
+    width: 100%;
+    margin-left: 0px;
+  }
 }

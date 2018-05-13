@@ -1,5 +1,5 @@
 ﻿@-moz-document url-prefix() {
-     #lab-one > input{
-       margin-right:3px !important;
-    }
+  #lab-one > input {
+    margin-right: 3px !important;
+  }
 }

@@ -1,61 +1,62 @@
 ﻿@font-face {
-    font-family:"Prociono";
-    src: url("../font/Prociono-Regular-webfont.ttf");
+  font-family: 'Prociono';
+  src: url('../font/Prociono-Regular-webfont.ttf');
 }
-.typeahead, .tt-query, .tt-hint {
-    border: 2px solid #CCCCCC;
-    border-radius: 8px 8px 8px 8px;
-    font-size: 20px;
-    height: 30px;
-    line-height: 30px;
-    outline: medium none;
-    width:100%;   
+.typeahead,
+.tt-query,
+.tt-hint {
+  border: 2px solid #cccccc;
+  border-radius: 8px 8px 8px 8px;
+  font-size: 20px;
+  height: 30px;
+  line-height: 30px;
+  outline: medium none;
+  width: 100%;
 }
 .typeahead {
-    background-color: #FFFFFF;
-    width:100%;  
+  background-color: #ffffff;
+  width: 100%;
 }
 .typeahead:focus {
-    border: 2px solid #0097CF;
+  border: 2px solid #0097cf;
 }
 .tt-query {
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
 }
 .tt-hint {
-    color: #999999;
+  color: #999999;
 }
 .tt-menu {
-    width: 100%;
-    margin: 2px 0;
-    padding: 8px 0;
-    background-color: lightgrey;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(184, 54, 54, 0.2);
-    border-radius: 8px;
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    height:auto;
-    opacity:0.9;
+  width: 100%;
+  margin: 2px 0;
+  padding: 8px 0;
+  background-color: lightgrey;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(184, 54, 54, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  height: auto;
+  opacity: 0.9;
 }
 .tt-suggestion {
-    
-    color:black;
-    font-size: 16px;
-    padding: 2px 5px;
-    display:block;
-    line-height:15px;   
+  color: black;
+  font-size: 16px;
+  padding: 2px 5px;
+  display: block;
+  line-height: 15px;
 }
 .tt-suggestion:hover {
-    background-color: #0097CF;
-    color: #FFFFFF;
-    border-radius:4px; 
+  background-color: #0097cf;
+  color: #ffffff;
+  border-radius: 4px;
 }
 .tt-suggestion p {
-    margin: 0;   
+  margin: 0;
 }
-.typehead-wrapper{
-    text-align:center; 
-    position:relative; 
-    top:-40px;
-    padding-left:15px;
-    padding-right:15px;
+.typehead-wrapper {
+  text-align: center;
+  position: relative;
+  top: -40px;
+  padding-left: 15px;
+  padding-right: 15px;
 }

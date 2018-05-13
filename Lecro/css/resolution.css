@@ -1,182 +1,177 @@
 ﻿/*full bootstrap*/
 @media only screen and (max-width: 150px) {
-.trending-icons, .isotope, #presidentsicons-wrapper{
-    border:none;
-
-}
-#checkbox-wrapper + p{
-    position:relative;
-    left:-54px;
-}
-#change-image{
-    position:relative;
-    left:-54px;
-}
-.typehead-wrapper{
-    position:relative;
-    left:-70px;
-    width:100px;
-}
-.isotope{
-    padding-left:2px;
-}
-#presidentsicons-wrapper{
-    padding-left:2px;
-}
-
+  .trending-icons,
+  .isotope,
+  #presidentsicons-wrapper {
+    border: none;
+  }
+  #checkbox-wrapper + p {
+    position: relative;
+    left: -54px;
+  }
+  #change-image {
+    position: relative;
+    left: -54px;
+  }
+  .typehead-wrapper {
+    position: relative;
+    left: -70px;
+    width: 100px;
+  }
+  .isotope {
+    padding-left: 2px;
+  }
+  #presidentsicons-wrapper {
+    padding-left: 2px;
+  }
 }
 @media only screen and (max-width: 220px) {
-    img.popupslike{
-        width:40px;
-        height:40px;
-    }
-    #cpanel{
-        border:none;
-    }
+  img.popupslike {
+    width: 40px;
+    height: 40px;
+  }
+  #cpanel {
+    border: none;
+  }
 }
 @media only screen and (max-width: 231px) {
-    div.onoffswitch{
-        position: absolute;
-        left: -60px;
-    }
+  div.onoffswitch {
+    position: absolute;
+    left: -60px;
+  }
 }
 @media only screen and (max-width: 269px) {
-    #heading-title-bootstrap {
-        font-size: 17px;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        font-style: initial;
-        display:none;
-}
-    .onoffswitch-switch{
-        width:10px;
-        height:30px;
-        top:3px;
-        left:55px;
-}
-    label{
-        max-width:60%;
-}
-
+  #heading-title-bootstrap {
+    font-size: 17px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: initial;
+    display: none;
+  }
+  .onoffswitch-switch {
+    width: 10px;
+    height: 30px;
+    top: 3px;
+    left: 55px;
+  }
+  label {
+    max-width: 60%;
+  }
 }
 @media only screen and (max-width: 285px) {
-    #heading-title-bootstrap {
-        font-size: 17px;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        font-style: initial;
-        left:110px;
+  #heading-title-bootstrap {
+    font-size: 17px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: initial;
+    left: 110px;
+  }
+  .tt-suggestion {
+    font-size: 12px;
+  }
+  .typeahead,
+  .tt-query,
+  .tt-hint {
+    font-size: 12px;
+  }
 }
-    .tt-suggestion {
-        font-size: 12px;
-}
-.typeahead, .tt-query, .tt-hint {
-        font-size:12px;
-}
+@media only screen and (max-width: 767px) {
+  img.navbar-brand {
+    position: absolute;
+    width: 100px;
+    height: 78px !important ;
+    top: -15px;
+    left: -15px;
+  }
+  .container-fluid > .navbar-collapse,
+  .container-fluid > .navbar-header,
+  .container > .navbar-collapse,
+  .container > .navbar-header {
+    margin-left: -100px;
+    margin-right: 0px;
+  }
+  #heading-title-bootstrap {
+    font-size: 19px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: initial;
+    position: absolute !important;
+    left: 50% !important;
+    margin-left: -32px !important;
+  }
 
+  #Radio0 {
+    position: relative !important;
+    left: 2px !important;
+    top: 0px !important;
+    margin-bottom: -50px;
+  }
+  #presidentsicons-wrapper {
+    width: 100%;
+    margin-left: 0px;
+  }
+  #lastcolumn {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .presidenticons {
+    margin: 3px;
+  }
+  .trending-icons {
+    margin-left: 15px;
+  }
+  #close-settings-div {
+    right: -2px;
+  }
+  #expand-chart {
+    visibility: hidden;
+  }
+  #fifth-check {
+    top: 187px;
+  }
+  #fourth-check {
+    top: 155px;
+  }
+  #third-check {
+    top: 106px;
+  }
+  #second-check {
+    top: 79px;
+  }
+  #first-check {
+    top: 51px;
+  }
+  #cpanel {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  .timeline-section {
+    margin-left: 15px;
+  }
 }
-@media only screen and (max-width: 767px) { 
-    img.navbar-brand {
-        position: absolute;
-        width: 100px ;
-        height: 78px !important ;
-        top: -15px ;
-        left: -15px;
-} 
-   .container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header{
-        margin-left:-100px;
-        margin-right:0px;
-   }
-   #heading-title-bootstrap {
-        font-size: 19px;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        font-style: initial;
-        position: absolute !important;
-        left: 50% !important;
-        margin-left: -32px !important;
+/*custom*/ /*heading fixed*/
+@media only screen and (max-width: 767px) {
+  #heading-title-bootstrap {
+    visibility: visible;
+    position: absolute;
+    top: 10px;
+    left: 43%;
+    z-index: 1;
+  }
+  #Radio0 {
+    position: relative;
+    left: 0;
+    top: 5px;
+  }
 }
-    
-    #Radio0 {
-        position:relative !important;
-        left: 2px !important;
-        top: 0px !important;
-        margin-bottom:-50px;
-    
-    }
-    #presidentsicons-wrapper{
-        width:100%;
-        margin-left:0px;
-       
-    }
-    #lastcolumn{
-        padding-right:0px;
-        padding-left:0px;
-    }
-    .presidenticons{
-        margin:3px;
-    }
-    .trending-icons{
-        margin-left: 15px;
-    }
-    #close-settings-div{
-        right: -2px;
-    }
-    #expand-chart{
-        visibility:hidden;
-    }
-    #fifth-check{
-        top:187px;
-    }
-    #fourth-check{
-        top:155px;
-    }
-     #third-check{
-        top:106px;
-    }
-    #second-check{
-        top:79px;
-        
-    } 
-    #first-check{
-        top:51px;
-    }
-    #cpanel{
-        margin-left:50px;
-        margin-right:50px;
-      }
-    .timeline-section{
-        margin-left: 15px;
-
-    }
-  
+@media only screen and (max-width: 992px) {
+  #Radio0 {
+    position: relative;
+    top: 40px;
+    left: -80px;
+    margin-bottom: 50px;
+  }
 }
-/*custom*//*heading fixed*/
-@media only screen and (max-width : 767px) {
-  
-    #heading-title-bootstrap {
-        visibility:visible;
-        position:absolute;
-        top:10px;
-        left:43%;
-        z-index:1;
-    }
-    #Radio0 {
-        position:relative;
-        left: 0;
-        top: 5px;
-    
-    }
+@media only screen and (max-width: 1483px) {
+  #category-section,
+  #arrow-left {
+    visibility: hidden;
+  }
 }
-@media only screen and (max-width: 992px) {  
-    #Radio0 {
-        position: relative;
-        top: 40px;
-        left: -80px;
-        margin-bottom: 50px;
-
-    }
-}
-@media only screen and (max-width: 1483px) {  
-    #category-section, #arrow-left{
-         visibility:hidden;
-    }
-}
-
